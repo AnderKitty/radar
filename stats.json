@@ -1,6 +1,6 @@
 {
   "scan_date": "2026-07-03",
-  "generated_at": "2026-07-03T03:55:43Z",
+  "generated_at": "2026-07-03T04:29:45Z",
   "total_devices": 68970,
   "by_criticality": {
     "CRITICAL": 505,
@@ -259,60 +259,8 @@
       "count": 730
     },
     {
-      "key": "CVE-2008-1446",
-      "count": 5
-    },
-    {
-      "key": "CVE-2009-2521",
-      "count": 5
-    },
-    {
       "key": "CVE-2015-3306",
       "count": 5
-    },
-    {
-      "key": "CVE-2005-2089",
-      "count": 4
-    },
-    {
-      "key": "CVE-2009-1535",
-      "count": 4
-    },
-    {
-      "key": "CVE-2009-4444",
-      "count": 4
-    },
-    {
-      "key": "CVE-2009-4445",
-      "count": 4
-    },
-    {
-      "key": "CVE-2017-7269",
-      "count": 4
-    },
-    {
-      "key": "CVE-2006-20001",
-      "count": 1
-    },
-    {
-      "key": "CVE-2007-4723",
-      "count": 1
-    },
-    {
-      "key": "CVE-2008-0455",
-      "count": 1
-    },
-    {
-      "key": "CVE-2009-0796",
-      "count": 1
-    },
-    {
-      "key": "CVE-2009-2299",
-      "count": 1
-    },
-    {
-      "key": "CVE-2009-3560",
-      "count": 1
     }
   ],
   "by_department": [
