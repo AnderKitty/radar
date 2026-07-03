@@ -1,0 +1,404 @@
+{
+  "scan_date": "2026-07-03",
+  "generated_at": "2026-07-03T03:55:43Z",
+  "total_devices": 68970,
+  "by_criticality": {
+    "CRITICAL": 505,
+    "HIGH": 44602,
+    "LOW": 1532,
+    "MEDIUM": 22331
+  },
+  "by_auth_state": {
+    "auth-required": 3322,
+    "open": 11869,
+    "unknown": 53779
+  },
+  "by_device_type": [
+    {
+      "key": "CAMERA",
+      "count": 40861
+    },
+    {
+      "key": "WEB_SERVER",
+      "count": 20039
+    },
+    {
+      "key": "ROUTER",
+      "count": 1476
+    },
+    {
+      "key": "REMOTE_ACCESS",
+      "count": 1344
+    },
+    {
+      "key": "HOST",
+      "count": 1314
+    },
+    {
+      "key": "SERVER",
+      "count": 1203
+    },
+    {
+      "key": "ADMIN_PANEL",
+      "count": 956
+    },
+    {
+      "key": "EXPOSED_DATABASE",
+      "count": 876
+    },
+    {
+      "key": "ICS/SCADA",
+      "count": 408
+    },
+    {
+      "key": "HONEYPOT",
+      "count": 230
+    },
+    {
+      "key": "IOT_DEVICE",
+      "count": 99
+    },
+    {
+      "key": "NETWORK_DEVICE",
+      "count": 82
+    },
+    {
+      "key": "EXPOSED_CAMERA",
+      "count": 81
+    },
+    {
+      "key": "PRINTER",
+      "count": 1
+    }
+  ],
+  "by_brand": [
+    {
+      "key": "Hikvision",
+      "count": 9682
+    },
+    {
+      "key": "MikroTik",
+      "count": 1463
+    },
+    {
+      "key": "TP-Link",
+      "count": 399
+    },
+    {
+      "key": "Xiongmai",
+      "count": 380
+    },
+    {
+      "key": "Ubiquiti",
+      "count": 142
+    },
+    {
+      "key": "Cisco",
+      "count": 114
+    },
+    {
+      "key": "Tenda",
+      "count": 30
+    },
+    {
+      "key": "Dahua",
+      "count": 11
+    },
+    {
+      "key": "Axis",
+      "count": 10
+    },
+    {
+      "key": "Vivotek",
+      "count": 6
+    },
+    {
+      "key": "Antel",
+      "count": 4
+    },
+    {
+      "key": "D-Link",
+      "count": 2
+    },
+    {
+      "key": "Brother",
+      "count": 1
+    },
+    {
+      "key": "Reolink",
+      "count": 1
+    }
+  ],
+  "by_isp": [
+    {
+      "key": "Administracion Nacional de Telecomunicaciones",
+      "count": 65121
+    },
+    {
+      "key": "Tecnowind S.A.",
+      "count": 1037
+    },
+    {
+      "key": "Telefonica Moviles del Uruguay SA",
+      "count": 942
+    },
+    {
+      "key": "Uruguay",
+      "count": 526
+    },
+    {
+      "key": "ZONAMERICA",
+      "count": 480
+    },
+    {
+      "key": "Telstar S.A.",
+      "count": 205
+    },
+    {
+      "key": "Lunamen S.A.",
+      "count": 128
+    },
+    {
+      "key": "Cooperacion Latino Americana de Redes Avanzadas",
+      "count": 127
+    },
+    {
+      "key": "LACNIC - Latin American and Caribbean IP address",
+      "count": 111
+    },
+    {
+      "key": "LAUAM MEGARED TELECOM, S.R.L.",
+      "count": 103
+    },
+    {
+      "key": "HOSTING EN LA WEB S.A.S.",
+      "count": 84
+    },
+    {
+      "key": "PASWER INTERNATIONAL S.A.",
+      "count": 33
+    },
+    {
+      "key": "TELEMAS SOCIEDAD ANONIMA",
+      "count": 27
+    },
+    {
+      "key": "Web2mil S.A",
+      "count": 17
+    },
+    {
+      "key": "VCR VIDEO CABLE RIVERA S.A.",
+      "count": 9
+    }
+  ],
+  "by_port": [
+    {
+      "key": 554,
+      "count": 22166
+    },
+    {
+      "key": 8000,
+      "count": 20670
+    },
+    {
+      "key": 37777,
+      "count": 20628
+    },
+    {
+      "key": 80,
+      "count": 19704
+    },
+    {
+      "key": 443,
+      "count": 10637
+    },
+    {
+      "key": 81,
+      "count": 5285
+    },
+    {
+      "key": 8080,
+      "count": 4958
+    },
+    {
+      "key": 8001,
+      "count": 4023
+    },
+    {
+      "key": 22,
+      "count": 3880
+    },
+    {
+      "key": 21,
+      "count": 2056
+    },
+    {
+      "key": 8443,
+      "count": 1917
+    },
+    {
+      "key": 8002,
+      "count": 1751
+    },
+    {
+      "key": 3389,
+      "count": 1645
+    },
+    {
+      "key": 23,
+      "count": 1501
+    },
+    {
+      "key": 9000,
+      "count": 1498
+    }
+  ],
+  "by_cve": [
+    {
+      "key": "CVE-2024-6387",
+      "count": 730
+    },
+    {
+      "key": "CVE-2008-1446",
+      "count": 5
+    },
+    {
+      "key": "CVE-2009-2521",
+      "count": 5
+    },
+    {
+      "key": "CVE-2015-3306",
+      "count": 5
+    },
+    {
+      "key": "CVE-2005-2089",
+      "count": 4
+    },
+    {
+      "key": "CVE-2009-1535",
+      "count": 4
+    },
+    {
+      "key": "CVE-2009-4444",
+      "count": 4
+    },
+    {
+      "key": "CVE-2009-4445",
+      "count": 4
+    },
+    {
+      "key": "CVE-2017-7269",
+      "count": 4
+    },
+    {
+      "key": "CVE-2006-20001",
+      "count": 1
+    },
+    {
+      "key": "CVE-2007-4723",
+      "count": 1
+    },
+    {
+      "key": "CVE-2008-0455",
+      "count": 1
+    },
+    {
+      "key": "CVE-2009-0796",
+      "count": 1
+    },
+    {
+      "key": "CVE-2009-2299",
+      "count": 1
+    },
+    {
+      "key": "CVE-2009-3560",
+      "count": 1
+    }
+  ],
+  "by_department": [
+    {
+      "key": "Montevideo",
+      "count": 45128
+    },
+    {
+      "key": "Maldonado",
+      "count": 6029
+    },
+    {
+      "key": "Paysandú",
+      "count": 2254
+    },
+    {
+      "key": "Durazno",
+      "count": 2230
+    },
+    {
+      "key": "Salto",
+      "count": 1340
+    },
+    {
+      "key": "Soriano",
+      "count": 1273
+    },
+    {
+      "key": "Artigas",
+      "count": 1205
+    },
+    {
+      "key": "Cerro Largo",
+      "count": 1122
+    },
+    {
+      "key": "San José",
+      "count": 1079
+    },
+    {
+      "key": "Canelones",
+      "count": 937
+    },
+    {
+      "key": "Tacuarembó",
+      "count": 920
+    },
+    {
+      "key": "Lavalleja",
+      "count": 887
+    },
+    {
+      "key": "Florida",
+      "count": 796
+    },
+    {
+      "key": "Treinta y Tres",
+      "count": 743
+    },
+    {
+      "key": "Colonia",
+      "count": 718
+    },
+    {
+      "key": "Flores",
+      "count": 678
+    },
+    {
+      "key": "Rocha",
+      "count": 605
+    },
+    {
+      "key": "Rivera",
+      "count": 568
+    },
+    {
+      "key": "Río Negro",
+      "count": 458
+    }
+  ],
+  "history": [
+    {
+      "date": "2026-07-03",
+      "total": 68970,
+      "critical": 505,
+      "high": 44602
+    }
+  ]
+}

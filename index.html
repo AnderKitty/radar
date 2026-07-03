@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar · Uruguay a la vista de internet</title>
+<meta name="description" content="Cuántos dispositivos uruguayos están expuestos en internet, medido todos los días. Solo estadísticas agregadas — sin IPs ni datos de ningún equipo en particular.">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.3"/>
+          <circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M12 12 L21 7" stroke="currentColor" stroke-width="1.3"/>
+          <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="brand-word">radar<span class="brand-dot">.</span>uy</span>
+    </a>
+    <span class="top-updated">actualizado <b id="updated">—</b></span>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- ══ HERO ══ -->
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">Radar diario · Uruguay</p>
+      <h1 class="hero-title">Lo que Uruguay deja<br>a la vista de internet</h1>
+      <p class="hero-lead">
+        Cámaras, routers y equipos que responden desde cualquier parte del mundo
+        sin que nadie los busque. Este radar los cuenta todos los días.
+      </p>
+      <div class="hero-figure">
+        <span class="bignum mono" id="hero-total">0</span>
+        <span class="bignum-label">dispositivos alcanzables desde internet, hoy</span>
+      </div>
+    </div>
+
+    <figure class="scope" aria-label="Representación de radar de los dispositivos detectados">
+      <svg class="scope-svg" viewBox="0 0 400 400" role="img">
+        <defs>
+          <radialGradient id="sweepGrad" cx="50%" cy="50%" r="50%">
+            <stop class="sw0" offset="0%" stop-opacity="0"/>
+            <stop class="sw0" offset="70%" stop-opacity="0"/>
+            <stop class="sw1" offset="100%" stop-opacity="0.30"/>
+          </radialGradient>
+          <clipPath id="scopeClip"><circle cx="200" cy="200" r="186"/></clipPath>
+        </defs>
+        <circle class="scope-face" cx="200" cy="200" r="186"/>
+        <g class="scope-rings" fill="none">
+          <circle cx="200" cy="200" r="186"/><circle cx="200" cy="200" r="140"/>
+          <circle cx="200" cy="200" r="94"/><circle cx="200" cy="200" r="48"/>
+        </g>
+        <g class="scope-cross"><path d="M200 14V386M14 200H386"/></g>
+        <g id="blips" clip-path="url(#scopeClip)"></g>
+        <g class="scope-sweep" clip-path="url(#scopeClip)">
+          <path d="M200 200 L200 14 A186 186 0 0 1 386 200 Z" fill="url(#sweepGrad)"/>
+          <line class="scope-line" x1="200" y1="200" x2="200" y2="14" stroke-width="1.5"/>
+        </g>
+        <circle class="scope-hub" cx="200" cy="200" r="3"/>
+      </svg>
+      <figcaption class="scope-cap">Cada punto es un equipo detectado. En <span class="dot-crit"></span> rojo, los críticos.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ══ CRITICIDAD ══ -->
+  <section class="band band-alarm">
+    <div class="wrap">
+      <p class="eyebrow">La foto de hoy</p>
+      <h2 class="band-head">
+        <span class="mono alarm" id="crit-num">0</span> están en estado crítico
+      </h2>
+      <p class="band-sub">
+        Accesibles sin contraseña, o con fallas de seguridad graves y públicamente conocidas.
+        El resto igual quedó a la vista, en distintos grados.
+      </p>
+      <div class="crit-bar" id="crit-bar" role="img" aria-label="Distribución por gravedad"></div>
+      <div class="crit-legend" id="crit-legend"></div>
+    </div>
+  </section>
+
+  <!-- ══ TIPOS ══ -->
+  <section class="wrap section">
+    <div class="section-head">
+      <p class="eyebrow">Qué son</p>
+      <h2 class="section-title">La mayoría son cámaras</h2>
+      <p class="section-sub">Qué tipo de equipos aparecen en el radar, ordenados por cantidad.</p>
+    </div>
+    <div class="chart-h" id="chart-devicetype"></div>
+  </section>
+
+  <!-- ══ AUTH ══ -->
+  <section class="band">
+    <div class="wrap">
+      <p class="eyebrow">¿Están protegidos?</p>
+      <h2 class="section-title">Expuestos y protegidos</h2>
+      <p class="section-sub">
+        "Expuesto" = responde sin pedir usuario ni contraseña. No probamos ninguna clave;
+        solo miramos si la puerta estaba abierta.
+      </p>
+      <div class="seg" id="auth-seg" role="img" aria-label="Expuestos vs protegidos"></div>
+      <div class="seg-legend" id="auth-legend"></div>
+    </div>
+  </section>
+
+  <!-- ══ MARCAS ══ -->
+  <section class="wrap section">
+    <div class="section-head">
+      <p class="eyebrow">Las marcas</p>
+      <h2 class="section-title">Quién fabrica lo expuesto</h2>
+      <p class="section-sub">Marcas identificadas por su huella pública (sin acceder a ningún equipo).</p>
+    </div>
+    <div class="chart-h" id="chart-brand"></div>
+  </section>
+
+  <!-- ══ DEPARTAMENTOS ══ -->
+  <section class="band">
+    <div class="wrap">
+      <p class="eyebrow">Dónde</p>
+      <h2 class="section-title">Por departamento</h2>
+      <p class="section-sub">Ubicación aproximada a nivel departamento — nunca una dirección concreta.</p>
+      <div class="chart-h" id="chart-depto"></div>
+    </div>
+  </section>
+
+  <!-- ══ ISP + CVE en dos columnas ══ -->
+  <section class="wrap section two-col">
+    <div>
+      <div class="section-head">
+        <p class="eyebrow">Operadores</p>
+        <h2 class="section-title">En qué redes están</h2>
+      </div>
+      <ol class="rank" id="rank-isp"></ol>
+    </div>
+    <div>
+      <div class="section-head">
+        <p class="eyebrow">Fallas conocidas</p>
+        <h2 class="section-title">Vulnerabilidades detectadas</h2>
+        <p class="section-sub">Fallas públicas (CVE) que afectan a los equipos según su versión.</p>
+      </div>
+      <ol class="rank" id="rank-cve"></ol>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ METODOLOGÍA / PRIVACIDAD ══ -->
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <h2 class="foot-title">Cómo se mide</h2>
+      <p>
+        Un escáner recorre a diario los rangos de IP asignados a Uruguay y anota qué
+        equipos responden en internet, qué servicios exponen y si piden autenticación.
+        Es reconocimiento <b>pasivo</b>: lee lo que cada equipo ya muestra, igual que lo
+        haría cualquiera. Nunca intenta adivinar contraseñas ni entrar a ningún lado.
+      </p>
+    </div>
+    <div>
+      <h2 class="foot-title">Qué <u>no</u> mostramos</h2>
+      <p>
+        Ninguna IP, ningún nombre de host, ninguna ubicación exacta, ningún equipo
+        en particular. Esta página tiene <b>solo números agregados</b> — miles de
+        equipos por cada dato — para informar sin darle a nadie un blanco.
+      </p>
+    </div>
+  </div>
+  <div class="wrap foot-note">
+    <span>Radar · datos agregados del proyecto OSINT-UY.</span>
+    <span class="mono" id="foot-total">—</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
