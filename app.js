@@ -43,7 +43,7 @@
     countUp($("#hero-total"), d.total_devices);
     $("#crit-num").textContent = fmt((d.by_criticality || {}).CRITICAL || 0);
 
-    drawBlips(d);
+    drawBlips();
     critBar(d.by_criticality || {}, d.total_devices);
     authSeg(d.by_auth_state || {});
 
@@ -69,14 +69,12 @@
     requestAnimationFrame(step);
   }
 
-  /* ── Blips del radar (muestra, no las IPs) ────────────────── */
-  function drawBlips(d) {
+  /* ── Contactos del radar (motivo atmosférico, no dato por punto) ── */
+  function drawBlips() {
     const g = $("#blips");
-    const cx = 200, cy = 200, R = 182;
-    const N = 190;
-    const critShare = d.total_devices ? (d.by_criticality.CRITICAL || 0) / d.total_devices : 0;
-    const reds = Math.max(3, Math.round(N * critShare));
-    // PRNG determinista para que el patrón sea estable entre cargas.
+    const cx = 200, cy = 200, R = 180;
+    const N = 230;
+    // PRNG determinista: el patrón queda estable entre cargas.
     let s = 0x2f6e2b1;
     const rnd = () => (s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
     for (let i = 0; i < N; i++) {
@@ -85,9 +83,10 @@
       const c = document.createElementNS(SVGNS, "circle");
       c.setAttribute("cx", (cx + Math.cos(ang) * rad).toFixed(1));
       c.setAttribute("cy", (cy + Math.sin(ang) * rad).toFixed(1));
-      const crit = i < reds;
-      c.setAttribute("r", crit ? 3.4 : 1.7 + rnd() * 1.1);
-      c.setAttribute("class", crit ? "blip-crit" : "blip");
+      const bright = i % 19 === 0;
+      c.setAttribute("r", bright ? 2.6 : (1.2 + rnd() * 1.0).toFixed(1));
+      c.setAttribute("class", bright ? "blip-bright" : "blip");
+      if (bright) c.style.animationDelay = (rnd() * 2.6).toFixed(2) + "s";
       g.appendChild(c);
     }
   }
