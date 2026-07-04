@@ -207,6 +207,31 @@
   }
 })();
 
+// ---- Mapa del registro público (realce progresivo) ----------------------
+var _regMap = null, _regLayer = null;
+window.renderRegistryMap = function (entries) {
+  var el = document.getElementById('reg-map');
+  if (!el || typeof L === 'undefined') return; // sin Leaflet: la lista alcanza
+  if (!_regMap) {
+    _regMap = L.map(el, { scrollWheelZoom: false }).setView([-32.8, -55.9], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap', maxZoom: 18
+    }).addTo(_regMap);
+    _regLayer = L.layerGroup().addTo(_regMap);
+  }
+  _regLayer.clearLayers();
+  entries.forEach(function (e) {
+    if (!e.location) return;
+    var meta = Registry.categoryMeta(e.category);
+    var m = L.circleMarker([e.location.lat, e.location.lng], {
+      radius: 7, color: meta.color, fillColor: meta.color, fillOpacity: 0.8, weight: 2
+    });
+    m.bindPopup('<strong>' + e.name + '</strong><br>' + meta.label +
+      '<br><a href="' + e.url + '" target="_blank" rel="noopener">Abrir →</a>');
+    m.addTo(_regLayer);
+  });
+};
+
 // ---- Información pública accesible (registro curado) ---------------------
 function renderPublicRegistry(entries) {
   var listEl = document.getElementById('reg-list');
