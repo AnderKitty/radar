@@ -41,3 +41,13 @@ details[open] summary::before{content:"− "}
   html{scroll-behavior:auto}
   [style*="radarSweep"],[style*="ping"],[style*="radarPulse"]{animation:none!important}
 }
+
+/* /home/ander/radar/style.css — registro público */
+.reg-filter{cursor:pointer;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:#0e141d;color:#e6edf3;font-size:13px}
+.reg-filter:hover{border-color:#4493f8}
+.reg-card{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:#0e141d;border:1px solid rgba(255,255,255,0.07);text-decoration:none;color:inherit}
+.reg-card:hover{border-color:rgba(68,147,248,0.5)}
+.reg-dot{width:10px;height:10px;border-radius:50%;margin-top:5px;flex:0 0 auto}
+.reg-name{font-weight:600;color:#e6edf3}
+.reg-sub{color:#8b98a5;font-size:13px;margin-top:2px}
+.reg-empty{color:#8b98a5}

@@ -206,3 +206,71 @@
     return `${dd} ${mes[(m || 1) - 1]} ${y}`;
   }
 })();
+
+// ---- Información pública accesible (registro curado) ---------------------
+function renderPublicRegistry(entries) {
+  var listEl = document.getElementById('reg-list');
+  var filterEl = document.getElementById('reg-filters');
+  if (!listEl) return;
+  var current = 'all';
+
+  function draw() {
+    var rows = Registry.filterByCategory(entries, current);
+    listEl.innerHTML = '';
+    if (rows.length === 0) {
+      var empty = document.createElement('p');
+      empty.className = 'reg-empty';
+      empty.textContent = 'Aún no hay recursos verificados en esta categoría.';
+      listEl.appendChild(empty);
+    } else {
+      rows.forEach(function (e) {
+        var meta = Registry.categoryMeta(e.category);
+        var card = document.createElement('a');
+        card.className = 'reg-card';
+        card.href = e.url; card.target = '_blank'; card.rel = 'noopener noreferrer';
+        var dot = document.createElement('span');
+        dot.className = 'reg-dot'; dot.style.background = meta.color;
+        var body = document.createElement('div');
+        var name = document.createElement('div');
+        name.className = 'reg-name'; name.textContent = e.name;
+        var sub = document.createElement('div');
+        sub.className = 'reg-sub';
+        sub.textContent = meta.label + ' · ' + e.operator + ' · ' + e.department;
+        body.appendChild(name); body.appendChild(sub);
+        card.appendChild(dot); card.appendChild(body);
+        listEl.appendChild(card);
+      });
+    }
+    if (window.renderRegistryMap) {
+      window.renderRegistryMap(Registry.filterByCategory(entries, current));
+    }
+  }
+
+  if (filterEl) {
+    var counts = Registry.countByCategory(entries);
+    var cats = ['all'].concat(Object.keys(Registry.CATEGORIES).filter(function (c) { return counts[c]; }));
+    filterEl.innerHTML = '';
+    cats.forEach(function (c) {
+      var b = document.createElement('button');
+      b.className = 'reg-filter';
+      b.textContent = c === 'all'
+        ? 'Todos (' + entries.length + ')'
+        : Registry.categoryMeta(c).label + ' (' + counts[c] + ')';
+      b.onclick = function () { current = c; draw(); };
+      filterEl.appendChild(b);
+    });
+  }
+  draw();
+}
+window.renderPublicRegistry = renderPublicRegistry;
+
+function loadPublicRegistry() {
+  fetch('public-registry.json?cb=' + Date.now())
+    .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+    .then(function (data) { renderPublicRegistry(data); })
+    .catch(function () {
+      var errEl = document.getElementById('reg-error');
+      if (errEl) errEl.style.display = 'block';
+    });
+}
+loadPublicRegistry();
