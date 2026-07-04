@@ -1,177 +1,207 @@
-/* Radar · carga stats.json (solo agregados) y dibuja el reporte. Vanilla, sin libs. */
+/* Radar.uy — carga stats.json (solo agregados) y renderiza el reporte.
+   Vanilla, sin dependencias. Adaptado del diseño de Claude Design a datos reales. */
 (() => {
   "use strict";
   const $ = (s) => document.querySelector(s);
-  const SVGNS = "http://www.w3.org/2000/svg";
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   const fmt = (n) => (n || 0).toLocaleString("es-UY");
+  const MONO = 'font-family:"IBM Plex Mono",monospace';
 
-  const DEVTYPE = {
-    CAMERA: "Cámaras", EXPOSED_CAMERA: "Cámaras abiertas", WEB_SERVER: "Servidores web",
-    ROUTER: "Routers", SERVER: "Servidores", HOST: "Otros equipos", ADMIN_PANEL: "Paneles de admin",
-    EXPOSED_DATABASE: "Bases de datos", "ICS/SCADA": "Sistemas industriales", REMOTE_ACCESS: "Acceso remoto",
-    IOT_DEVICE: "Dispositivos IoT", NETWORK_DEVICE: "Equipos de red", PRINTER: "Impresoras", HONEYPOT: "Señuelos",
+  /* ── Mapeos de presentación ─────────────────────────────────── */
+  const DEV_RED = new Set(["EXPOSED_CAMERA", "EXPOSED_DATABASE", "EXPOSED_SERVICE", "ICS/SCADA", "NETWORK_DEVICE"]);
+  const DEV_ORANGE = new Set(["CAMERA", "ADMIN_PANEL", "REMOTE_ACCESS", "HONEYPOT"]);
+  const DEV_YELLOW = new Set(["ROUTER", "IOT_DEVICE", "PRINTER"]);
+  const devColor = (k) =>
+    DEV_RED.has(k) ? "#f85149" : DEV_ORANGE.has(k) ? "#f0883e" : DEV_YELLOW.has(k) ? "#d4a72c" : "#4493f8";
+
+  const PORTNAME = {
+    80: "HTTP", 443: "HTTPS", 22: "SSH", 554: "RTSP", 8080: "HTTP-alt", 8000: "HTTP-alt", 8081: "HTTP-alt",
+    3389: "RDP", 21: "FTP", 23: "Telnet", 25: "SMTP", 37777: "Dahua", 34567: "DVR", 8443: "HTTPS-alt",
+    3306: "MySQL", 5432: "PostgreSQL", 6379: "Redis", 27017: "MongoDB", 502: "Modbus", 102: "S7",
+    1883: "MQTT", 8883: "MQTT-TLS", 2375: "Docker", 5900: "VNC", 9000: "Cámara", 161: "SNMP", 3000: "HTTP-alt",
   };
-  const CRITLABEL = { CRITICAL: "Crítico", HIGH: "Alto", MEDIUM: "Medio", LOW: "Bajo" };
-  const CRITVAR = { CRITICAL: "var(--crit)", HIGH: "var(--high)", MEDIUM: "var(--medium)", LOW: "var(--low)" };
-  const AUTHLABEL = { open: "Expuestos", "auth-required": "Protegidos", unknown: "Sin determinar" };
-  const AUTHVAR = { open: "var(--alarm)", "auth-required": "var(--low)", unknown: "var(--ink-2)" };
-  const CVENOTE = {
-    "CVE-2024-6387": "OpenSSH · ejecución remota (“regreSSHion”)",
-    "CVE-2017-7921": "Hikvision · acceso sin contraseña",
-    "CVE-2021-36260": "Hikvision · ejecución remota",
-    "CVE-2018-14847": "MikroTik · lectura de credenciales",
-    "CVE-2021-40438": "Apache · petición forzada al servidor",
-    "CVE-2015-3306": "ProFTPD · lectura/escritura de archivos",
+  const portLabel = (p) => (PORTNAME[p] ? `:${p} · ${PORTNAME[p]}` : `:${p}`);
+
+  function prettyISP(name) {
+    const s = (name || "").toLowerCase();
+    if (s.includes("telecomunicaciones") || s.includes("antel")) return "ANTEL";
+    if (s.includes("claro") || s.includes("america movil") || s.includes("amx") || s.includes("am wireless")) return "Claro";
+    if (s.includes("telefonica") || s.includes("movistar")) return "Movistar";
+    if (s.includes("dedicado")) return "Dedicado";
+    if (s.includes("tv cable") || s.includes("cable")) return "TV Cable";
+    return name.length > 24 ? name.slice(0, 24) + "…" : name;
+  }
+
+  const CVE_INFO = {
+    "CVE-2017-7921": { product: "Hikvision · backdoor", severity: "CRITICAL" },
+    "CVE-2021-36260": { product: "Hikvision · RCE", severity: "CRITICAL" },
+    "CVE-2024-6387": { product: "OpenSSH · regreSSHion", severity: "HIGH" },
+    "CVE-2021-41773": { product: "Apache 2.4.49 · RCE", severity: "CRITICAL" },
+    "CVE-2021-42013": { product: "Apache 2.4.50 · RCE", severity: "CRITICAL" },
+    "CVE-2019-10149": { product: "Exim · RCE", severity: "CRITICAL" },
+    "CVE-2015-3306": { product: "ProFTPD · RCE", severity: "CRITICAL" },
+    "CVE-2018-14847": { product: "MikroTik · lectura de credenciales", severity: "HIGH" },
+    "CVE-2021-40438": { product: "Apache · SSRF", severity: "HIGH" },
   };
+  const cveInfo = (id) => CVE_INFO[id] || { product: "Falla pública conocida", severity: "HIGH" };
+  function sevColors(sev) {
+    if (sev === "CRITICAL") return { bg: "rgba(248,81,73,0.14)", fg: "#ff8a84" };
+    if (sev === "HIGH") return { bg: "rgba(240,136,62,0.14)", fg: "#f0883e" };
+    if (sev === "MEDIUM") return { bg: "rgba(212,167,44,0.14)", fg: "#d4a72c" };
+    return { bg: "rgba(68,147,248,0.14)", fg: "#4493f8" };
+  }
 
-  const label = (map, k) => map[k] || k;
+  /* ── Helper de DOM ──────────────────────────────────────────── */
+  function el(tag, style, text) {
+    const n = document.createElement(tag);
+    if (style) n.style.cssText = style;
+    if (text != null) n.textContent = text;
+    return n;
+  }
 
+  /* ── Carga ──────────────────────────────────────────────────── */
   fetch("stats.json", { cache: "no-store" })
     .then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
     .then(render)
-    .catch(() => {
-      $("#hero-total").textContent = "—";
-      $(".hero-lead").textContent = "No pudimos cargar los datos de hoy. Probá recargar en un rato.";
-    });
+    .catch(() => document.body.classList.add("load-failed"));
 
   function render(d) {
-    $("#updated").textContent = fmtDate(d.scan_date);
-    $("#foot-total").textContent = fmt(d.total_devices) + " equipos";
+    $("#last-run").textContent = d.last_run || "02:00 · America/Montevideo";
+    document.querySelectorAll(".updated").forEach((n) => (n.textContent = fmtDate(d.scan_date || d.updated)));
 
-    countUp($("#hero-total"), d.total_devices);
-    $("#crit-num").textContent = fmt((d.by_criticality || {}).CRITICAL || 0);
+    const c = d.by_criticality || {};
+    const auth = d.by_auth_state || {};
+    const targets = {
+      crit: c.CRITICAL || 0, high: c.HIGH || 0, med: c.MEDIUM || 0, low: c.LOW || 0,
+      hosts: d.total_devices || 0, open: auth.open || 0,
+    };
+    if (d.ips_scanned != null) targets.ips = d.ips_scanned;
+    else $("#card-ips").style.display = "none";
 
-    drawBlips();
-    critBar(d.by_criticality || {}, d.total_devices);
-    authSeg(d.by_auth_state || {});
+    barChart("#device-bars", (d.by_device_type || []).slice(0, 9)
+      .map((x) => ({ label: x.key, value: x.count, color: devColor(x.key) })), "120px,150px");
+    barChart("#brand-bars", (d.by_brand || []).slice(0, 8)
+      .map((x) => ({ label: x.key, value: x.count, color: "#4493f8" })), "110px,130px");
+    barChart("#isp-bars", ispRows(d.by_isp || []).map((x) => ({ ...x, color: "#7c8dff" })), "110px,130px");
+    barChart("#port-bars", (d.by_port || []).slice(0, 8)
+      .map((x) => ({ label: portLabel(x.key), value: x.count, color: "#3fb3a8" })), "120px,150px");
 
-    bars("#chart-devicetype", (d.by_device_type || []).slice(0, 8).map((x) => ({ label: label(DEVTYPE, x.key), count: x.count })));
-    bars("#chart-brand", (d.by_brand || []).slice(0, 8).map((x) => ({ label: x.key, count: x.count })));
-    bars("#chart-depto", (d.by_department || []).slice(0, 10).map((x) => ({ label: x.key, count: x.count })));
-
-    rankList("#rank-isp", (d.by_isp || []).slice(0, 6).map((x) => ({ name: x.key, count: x.count })));
-    rankList("#rank-cve", (d.by_cve || []).slice(0, 6).map((x) => ({ name: x.key, note: CVENOTE[x.key], count: x.count })));
+    authChart(auth);
+    cveList(d.by_cve || []);
+    trend(d.history || []);
+    startCounters(targets);
   }
 
-  /* ── Contador ─────────────────────────────────────────────── */
-  function countUp(node, target) {
-    target = target || 0;
-    if (reduce) { node.textContent = fmt(target); return; }
-    const dur = 1800, t0 = performance.now();
-    const ease = (t) => 1 - Math.pow(1 - t, 3);
-    function step(now) {
-      const p = Math.min(1, (now - t0) / dur);
-      node.textContent = fmt(Math.round(target * ease(p)));
-      if (p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
+  /* ── ISPs: fusionar por nombre lindo, top 6 ─────────────────── */
+  function ispRows(list) {
+    const m = new Map();
+    list.forEach((x) => { const k = prettyISP(x.key); m.set(k, (m.get(k) || 0) + x.count); });
+    return [...m.entries()].map(([label, value]) => ({ label, value }))
+      .sort((a, b) => b.value - a.value).slice(0, 6);
   }
 
-  /* ── Contactos del radar (motivo atmosférico, no dato por punto) ── */
-  function drawBlips() {
-    const g = $("#blips");
-    const cx = 200, cy = 200, R = 180;
-    const N = 230;
-    // PRNG determinista: el patrón queda estable entre cargas.
-    let s = 0x2f6e2b1;
-    const rnd = () => (s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
-    for (let i = 0; i < N; i++) {
-      const ang = rnd() * Math.PI * 2;
-      const rad = Math.sqrt(rnd()) * R;
-      const c = document.createElementNS(SVGNS, "circle");
-      c.setAttribute("cx", (cx + Math.cos(ang) * rad).toFixed(1));
-      c.setAttribute("cy", (cy + Math.sin(ang) * rad).toFixed(1));
-      const bright = i % 19 === 0;
-      c.setAttribute("r", bright ? 2.6 : (1.2 + rnd() * 1.0).toFixed(1));
-      c.setAttribute("class", bright ? "blip-bright" : "blip");
-      if (bright) c.style.animationDelay = (rnd() * 2.6).toFixed(2) + "s";
-      g.appendChild(c);
-    }
-  }
-
-  /* ── Barra de criticidad ──────────────────────────────────── */
-  function critBar(by, total) {
-    const bar = $("#crit-bar"), leg = $("#crit-legend");
-    const order = ["CRITICAL", "HIGH", "MEDIUM", "LOW"];
-    order.forEach((k) => {
-      const n = by[k] || 0; if (!n) return;
-      const seg = document.createElement("span");
-      seg.style.flex = n; seg.style.background = CRITVAR[k];
-      seg.title = `${CRITLABEL[k]}: ${fmt(n)}`;
-      bar.appendChild(seg);
-    });
-    order.forEach((k) => {
-      const n = by[k] || 0; if (!n) return;
-      leg.appendChild(legendItem(CRITVAR[k], CRITLABEL[k], n));
-    });
-  }
-
-  function authSeg(by) {
-    const seg = $("#auth-seg"), leg = $("#auth-legend");
-    const order = ["open", "auth-required", "unknown"];
-    const total = order.reduce((a, k) => a + (by[k] || 0), 0) || 1;
-    order.forEach((k) => {
-      const n = by[k] || 0; if (!n) return;
-      const s = document.createElement("span");
-      s.style.flex = n; s.style.background = AUTHVAR[k];
-      const p = Math.round((n / total) * 100);
-      s.textContent = p >= 9 ? AUTHLABEL[k] : "";
-      if (k === "unknown") s.style.color = "var(--ink)";
-      seg.appendChild(s);
-    });
-    order.forEach((k) => {
-      const n = by[k] || 0; if (!n) return;
-      leg.appendChild(legendItem(AUTHVAR[k], AUTHLABEL[k], n));
-    });
-  }
-
-  function legendItem(color, name, n) {
-    const li = document.createElement("div"); li.className = "li";
-    const sw = document.createElement("span"); sw.className = "sw"; sw.style.background = color;
-    const nm = document.createElement("span"); nm.textContent = name + " ";
-    const num = document.createElement("span"); num.className = "n"; num.textContent = fmt(n);
-    li.append(sw, nm, num);
-    return li;
-  }
-
-  /* ── Barras horizontales ──────────────────────────────────── */
-  function bars(sel, rows) {
-    const host = $(sel);
-    const max = rows.length ? rows[0].count : 1;
+  /* ── Barras horizontales ────────────────────────────────────── */
+  function barChart(sel, rows, labelCol) {
+    const host = $(sel); host.textContent = "";
+    const max = Math.max(1, ...rows.map((r) => r.value));
     rows.forEach((r) => {
-      const row = document.createElement("div"); row.className = "row";
-      const lbl = document.createElement("div"); lbl.className = "row-label"; lbl.textContent = r.label; lbl.title = r.label;
-      const track = document.createElement("div"); track.className = "row-track";
-      const fill = document.createElement("div"); fill.className = "row-fill";
-      fill.style.width = Math.max(2, (r.count / max) * 100) + "%";
-      track.appendChild(fill);
-      const val = document.createElement("div"); val.className = "row-val mono"; val.textContent = fmt(r.count);
+      const row = el("div", `display:grid;grid-template-columns:minmax(${labelCol}) 1fr auto;gap:14px;align-items:center`);
+      const lbl = el("div", `${MONO};font-size:12px;color:#9aa7b6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis`, r.label);
+      lbl.title = r.label;
+      const track = el("div", "height:9px;border-radius:6px;background:rgba(255,255,255,0.05);overflow:hidden");
+      track.appendChild(el("div", `height:100%;border-radius:6px;width:${Math.max(2, (r.value / max) * 100)}%;background:${r.color}`));
+      const val = el("div", `${MONO};font-size:12px;color:#e6edf3;min-width:52px;text-align:right`, fmt(r.value));
       row.append(lbl, track, val);
       host.appendChild(row);
     });
   }
 
-  /* ── Rankings ─────────────────────────────────────────────── */
-  function rankList(sel, rows) {
-    const host = $(sel);
-    rows.forEach((r, i) => {
-      const li = document.createElement("li");
-      const idx = document.createElement("span"); idx.className = "idx"; idx.textContent = String(i + 1).padStart(2, "0");
-      const name = document.createElement("span"); name.className = "name";
-      name.textContent = r.name;
-      if (r.note) { const s = document.createElement("small"); s.textContent = r.note; name.appendChild(s); }
-      const cnt = document.createElement("span"); cnt.className = "cnt mono"; cnt.textContent = fmt(r.count);
-      li.append(idx, name, cnt);
-      host.appendChild(li);
+  /* ── Estado de autenticación ────────────────────────────────── */
+  function authChart(auth) {
+    const host = $("#auth-bars"); host.textContent = "";
+    const rows = [
+      { label: "Requiere credenciales", value: auth["auth-required"] || 0, color: "#3fb950" },
+      { label: "Sin autenticación (open)", value: auth.open || 0, color: "#f85149" },
+      { label: "Desconocido", value: auth.unknown || 0, color: "#5f6b7a" },
+    ];
+    const max = Math.max(1, ...rows.map((r) => r.value));
+    rows.forEach((r) => {
+      const wrap = el("div");
+      const top = el("div", `display:flex;justify-content:space-between;${MONO};font-size:12.5px;margin-bottom:7px`);
+      top.append(el("span", "color:#9aa7b6", r.label), el("span", "color:#e6edf3", fmt(r.value)));
+      const track = el("div", "height:9px;border-radius:6px;background:rgba(255,255,255,0.05);overflow:hidden");
+      track.appendChild(el("div", `height:100%;border-radius:6px;width:${Math.max(2, (r.value / max) * 100)}%;background:${r.color}`));
+      wrap.append(top, track);
+      host.appendChild(wrap);
     });
   }
 
+  /* ── CVEs ───────────────────────────────────────────────────── */
+  function cveList(list) {
+    const host = $("#cve-rows"); host.textContent = "";
+    if (!list.length) {
+      host.appendChild(el("div", "font-size:13px;color:#5f6b7a;padding:8px 0", "Sin CVEs inferidos en este barrido."));
+      return;
+    }
+    list.slice(0, 6).forEach((x) => {
+      const info = cveInfo(x.key), sv = sevColors(info.severity);
+      const row = el("div", "display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.05)");
+      const left = el("div", "min-width:0");
+      left.append(el("div", `${MONO};font-size:13px;color:#e6edf3`, x.key),
+        el("div", "font-size:12px;color:#9aa7b6;margin-top:2px", info.product));
+      const right = el("div", "display:flex;align-items:center;gap:12px;flex-shrink:0");
+      right.append(
+        el("span", `${MONO};font-size:10.5px;letter-spacing:0.06em;padding:3px 8px;border-radius:5px;background:${sv.bg};color:${sv.fg}`, info.severity),
+        el("span", `${MONO};font-size:13px;color:#9aa7b6;min-width:44px;text-align:right`, fmt(x.count)));
+      row.append(left, right);
+      host.appendChild(row);
+    });
+  }
+
+  /* ── Tendencia (críticos por día) ───────────────────────────── */
+  function trend(hist) {
+    const host = $("#hist-bars"); host.textContent = "";
+    const rows = hist.slice(-30);
+    if (!rows.length) {
+      host.appendChild(el("div", `${MONO};font-size:12px;color:#5f6b7a;align-self:center`, "La serie diaria se va llenando con cada barrido."));
+      return;
+    }
+    const max = Math.max(1, ...rows.map((h) => h.critical || 0));
+    rows.forEach((h) => {
+      const v = h.critical || 0;
+      const bar = el("div", `flex:1;height:${Math.max(6, (v / max) * 100)}%;background:linear-gradient(180deg,#f85149,rgba(248,81,73,0.25));border-radius:3px 3px 0 0;min-height:5px`);
+      bar.title = `${h.date}: ${fmt(v)} críticos`;
+      host.appendChild(bar);
+    });
+  }
+
+  /* ── Contadores animados ────────────────────────────────────── */
+  function startCounters(targets) {
+    const run = () => animateCounters(targets);
+    if (reduce || !("IntersectionObserver" in window)) { run(); return; }
+    const io = new IntersectionObserver((ents, obs) => {
+      if (ents.some((e) => e.isIntersecting)) { run(); obs.disconnect(); }
+    }, { threshold: 0.15 });
+    io.observe($("#numeros"));
+  }
+
+  function animateCounters(targets) {
+    const nodes = [...document.querySelectorAll(".kpi-num[data-kpi]")];
+    const set = (k, v) => nodes.forEach((n) => { if (n.dataset.kpi === k) n.textContent = fmt(v); });
+    if (reduce) { for (const k in targets) set(k, targets[k]); return; }
+    const start = performance.now(), dur = 1500, ease = (t) => 1 - Math.pow(1 - t, 3);
+    (function tick(now) {
+      const e = ease(Math.min(1, (now - start) / dur));
+      for (const k in targets) set(k, Math.round(targets[k] * e));
+      if ((now - start) / dur < 1) requestAnimationFrame(tick);
+    })(start);
+  }
+
+  /* ── Fecha ──────────────────────────────────────────────────── */
   function fmtDate(iso) {
     if (!iso) return "—";
-    const [y, m, dd] = iso.split("-").map(Number);
-    const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-    return `${dd} de ${meses[(m || 1) - 1]} de ${y}`;
+    const [y, m, dd] = String(iso).split("-").map(Number);
+    const mes = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+    return `${dd} ${mes[(m || 1) - 1]} ${y}`;
   }
 })();
