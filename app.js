@@ -282,7 +282,7 @@ function renderPublicRegistry(entries) {
       });
     }
     if (window.renderRegistryMap) {
-      window.renderRegistryMap(Registry.filterByCategory(entries, current));
+      window.renderRegistryMap(rows);
     }
   }
 
@@ -296,9 +296,16 @@ function renderPublicRegistry(entries) {
       b.textContent = c === 'all'
         ? 'Todos (' + entries.length + ')'
         : Registry.categoryMeta(c).label + ' (' + counts[c] + ')';
-      b.onclick = function () { current = c; draw(); };
+      b.onclick = function () {
+        current = c;
+        draw();
+        Array.prototype.forEach.call(filterEl.children, function (x) {
+          x.classList.toggle('active', x === b);
+        });
+      };
       filterEl.appendChild(b);
     });
+    if (filterEl.firstChild) filterEl.firstChild.classList.add('active');
   }
   draw();
 }
