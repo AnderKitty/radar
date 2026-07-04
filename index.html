@@ -10,6 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body>
 <div style="min-height:100vh;position:relative;overflow-x:hidden">
@@ -31,6 +33,7 @@
         <a href="#legal" style="text-decoration:none">Legalidad</a>
         <a href="#tecnico" style="text-decoration:none">Cómo funciona</a>
         <a href="#faq" style="text-decoration:none">FAQ</a>
+        <a href="#publicos" style="text-decoration:none">Recursos públicos</a>
       </div>
     </div>
   </nav>
@@ -316,6 +319,17 @@
     </div>
   </section>
 
+  <section id="publicos" style="padding:56px 28px;border-top:1px solid rgba(255,255,255,0.06)">
+    <div style="max-width:1080px;margin:0 auto">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3vw,32px);margin:0 0 10px">Información pública accesible</h2>
+      <p style="color:#8b98a5;max-width:70ch;margin:0 0 6px">Directorio de recursos que el Estado y operadores ya publican como públicos: datos abiertos, APIs y cámaras de acceso libre. Verificado a mano — nada de equipos personales.</p>
+      <div id="reg-error" style="display:none;margin:14px 0;padding:12px 14px;border-radius:10px;background:rgba(248,81,73,0.08);border:1px solid rgba(248,81,73,0.3);color:#ffb3ae">No pudimos cargar el registro público. Probá recargar en un rato.</div>
+      <div id="reg-filters" style="display:flex;flex-wrap:wrap;gap:8px;margin:18px 0"></div>
+      <div id="reg-map" style="height:420px;border-radius:14px;overflow:hidden;margin-bottom:22px;background:#0e141d"></div>
+      <div id="reg-list" style="display:flex;flex-direction:column;gap:10px"></div>
+    </div>
+  </section>
+
   <!-- CONTACT / FOOTER -->
   <footer style="padding:56px 28px 40px;border-top:1px solid rgba(255,255,255,0.06)">
     <div style="max-width:1160px;margin:0 auto">
@@ -350,6 +364,9 @@
   </footer>
 
 </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="registry.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
