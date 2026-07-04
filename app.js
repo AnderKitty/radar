@@ -227,7 +227,7 @@ function renderPublicRegistry(entries) {
         var meta = Registry.categoryMeta(e.category);
         var card = document.createElement('a');
         card.className = 'reg-card';
-        card.href = e.url; card.target = '_blank'; card.rel = 'noopener noreferrer';
+        card.href = /^https?:\/\//i.test(e.url) ? e.url : '#'; card.target = '_blank'; card.rel = 'noopener noreferrer';
         var dot = document.createElement('span');
         dot.className = 'reg-dot'; dot.style.background = meta.color;
         var body = document.createElement('div');
