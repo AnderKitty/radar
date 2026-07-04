@@ -1,0 +1,80 @@
+[
+  {
+    "id": "mvd-api-transporte",
+    "name": "API de transporte público en tiempo real (STM)",
+    "category": "api_municipal",
+    "operator": "Intendencia de Montevideo",
+    "department": "Montevideo",
+    "location": { "lat": -34.9011, "lng": -56.1645, "approx": true },
+    "url": "https://api.montevideo.gub.uy/apidocs/publictransport",
+    "access": "open",
+    "source": "https://api.montevideo.gub.uy/docs",
+    "verified_at": "2026-07-04",
+    "notes": "Posición de buses en tiempo real y ETA."
+  },
+  {
+    "id": "mvd-mapa-buses",
+    "name": "Mapa de buses en vivo",
+    "category": "api_municipal",
+    "operator": "Intendencia de Montevideo",
+    "department": "Montevideo",
+    "location": { "lat": -34.9011, "lng": -56.1645, "approx": true },
+    "url": "https://www.montevideo.gub.uy/buses/mapaBuses.html",
+    "access": "open",
+    "source": "https://montevideo.gub.uy/areas-tematicas/servicios-digitales",
+    "verified_at": "2026-07-04",
+    "notes": ""
+  },
+  {
+    "id": "uy-gtfs-metropolitano",
+    "name": "Horarios de ómnibus metropolitanos (GTFS)",
+    "category": "dato_abierto",
+    "operator": "MTOP",
+    "department": "Nacional",
+    "location": { "lat": -34.8, "lng": -56.0, "approx": true },
+    "url": "https://catalogodatos.gub.uy/dataset/?tags=STM",
+    "access": "open",
+    "source": "https://catalogodatos.gub.uy/dataset/?tags=STM",
+    "verified_at": "2026-07-04",
+    "notes": "Feed GTFS de líneas interdepartamentales."
+  },
+  {
+    "id": "uy-datos-abiertos",
+    "name": "Catálogo Nacional de Datos Abiertos",
+    "category": "dato_abierto",
+    "operator": "AGESIC",
+    "department": "Nacional",
+    "location": { "lat": -34.9, "lng": -56.19, "approx": true },
+    "url": "https://www.gub.uy/datos-abiertos",
+    "access": "open",
+    "source": "https://catalogodatos.gub.uy",
+    "verified_at": "2026-07-04",
+    "notes": ""
+  },
+  {
+    "id": "pde-webcam-mano",
+    "name": "Cámara en vivo — La Mano / Playa Brava",
+    "category": "camara_publica",
+    "operator": "SkylineWebcams",
+    "department": "Maldonado",
+    "location": { "lat": -34.9633, "lng": -54.9500, "approx": true },
+    "url": "https://www.skylinewebcams.com/en/webcam/uruguay/maldonado/punta-del-este/punta-del-este-uruguay.html",
+    "access": "open",
+    "source": "https://www.skylinewebcams.com/en/webcam/uruguay.html",
+    "verified_at": "2026-07-04",
+    "notes": "Webcam pública de turismo, acceso libre."
+  },
+  {
+    "id": "piriapolis-webcam-playa-grande",
+    "name": "Cámara en vivo — Playa Grande, Piriápolis",
+    "category": "camara_publica",
+    "operator": "SkylineWebcams",
+    "department": "Maldonado",
+    "location": { "lat": -34.8667, "lng": -55.2667, "approx": true },
+    "url": "https://www.skylinewebcams.com/en/webcam/uruguay/maldonado/piriapolis/playa-grande.html",
+    "access": "open",
+    "source": "https://www.skylinewebcams.com/en/webcam/uruguay.html",
+    "verified_at": "2026-07-04",
+    "notes": "Webcam pública de turismo, acceso libre."
+  }
+]
