@@ -15,7 +15,8 @@
     DEV_RED.has(k) ? "#f85149" : DEV_ORANGE.has(k) ? "#f0883e" : DEV_YELLOW.has(k) ? "#d4a72c" : "#4493f8";
 
   const PORTNAME = {
-    80: "HTTP", 443: "HTTPS", 22: "SSH", 554: "RTSP", 8080: "HTTP-alt", 8000: "HTTP-alt", 8081: "HTTP-alt",
+    80: "HTTP", 443: "HTTPS", 22: "SSH", 554: "RTSP", 81: "HTTP-alt", 8080: "HTTP-alt",
+    8000: "HTTP-alt", 8001: "HTTP-alt", 8002: "HTTP-alt", 8081: "HTTP-alt",
     3389: "RDP", 21: "FTP", 23: "Telnet", 25: "SMTP", 37777: "Dahua", 34567: "DVR", 8443: "HTTPS-alt",
     3306: "MySQL", 5432: "PostgreSQL", 6379: "Redis", 27017: "MongoDB", 502: "Modbus", 102: "S7",
     1883: "MQTT", 8883: "MQTT-TLS", 2375: "Docker", 5900: "VNC", 9000: "Cámara", 161: "SNMP", 3000: "HTTP-alt",
