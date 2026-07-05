@@ -95,6 +95,8 @@
     barChart("#isp-bars", ispRows(d.by_isp || []).map((x) => ({ ...x, color: "#7c8dff" })), "110px,130px");
     barChart("#port-bars", (d.by_port || []).slice(0, 8)
       .map((x) => ({ label: portLabel(x.key), value: x.count, color: "#3fb3a8" })), "120px,150px");
+    barChart("#dept-bars", (d.by_department || []).slice(0, 10)
+      .map((x) => ({ label: x.key, value: x.count, color: "#bc8cff" })), "120px,150px");
 
     authChart(auth);
     cveList(d.by_cve || []);
