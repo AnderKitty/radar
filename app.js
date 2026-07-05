@@ -101,7 +101,60 @@
     authChart(auth);
     cveList(d.by_cve || []);
     trend(d.history || []);
+    indexCard(d);
+    ispRank(d.by_isp_detail || []);
     startCounters(targets);
+  }
+
+  /* ── Índice de Exposición ───────────────────────────────────── */
+  function indexCard(d) {
+    if (d.exposure_index == null) return;
+    const card = $("#index-card");
+    if (!card) return;
+    card.style.display = "block";
+    $("#index-num").textContent = d.exposure_index;
+    const h = d.history || [];
+    const t = $("#index-trend");
+    // Solo mostramos tendencia si el día previo ya tenía índice (>0): así no
+    // saltamos contra días viejos anteriores a esta métrica.
+    if (t && h.length >= 2 && h[h.length - 2].index > 0) {
+      const delta = (h[h.length - 1].index || 0) - h[h.length - 2].index;
+      if (delta > 0) { t.textContent = "▲ +" + delta + " vs. ayer"; t.style.color = "#f85149"; }
+      else if (delta < 0) { t.textContent = "▼ " + delta + " vs. ayer"; t.style.color = "#3fb950"; }
+      else { t.textContent = "sin cambios vs. ayer"; t.style.color = "#8b98a5"; }
+    }
+  }
+
+  /* ── Ranking por operador (ISP) ─────────────────────────────── */
+  const ISP_COLS = "minmax(110px,1.4fr) 80px 1fr 1fr";
+  function ispRank(list) {
+    const box = $("#isp-rank");
+    if (!box || !list.length) return;
+    const card = $("#isp-rank-card");
+    if (card) card.style.display = "block";
+    box.textContent = "";
+    const head = el("div", `display:grid;grid-template-columns:${ISP_COLS};gap:12px;align-items:center;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.07)`);
+    ["Operador", "Expuestos", "% críticos", "% abiertos"].forEach((txt, i) => {
+      head.appendChild(el("div", `${MONO};font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#5f6b7a${i ? ";text-align:right" : ""}`, txt));
+    });
+    box.appendChild(head);
+    list.slice(0, 8).forEach((x) => {
+      const pctCrit = x.total ? Math.round((100 * (x.critical || 0)) / x.total) : 0;
+      const pctOpen = x.total ? Math.round((100 * (x.open || 0)) / x.total) : 0;
+      const row = el("div", `display:grid;grid-template-columns:${ISP_COLS};gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.04)`);
+      const name = el("div", "font-size:13.5px;color:#e6edf3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis", x.isp);
+      name.title = x.isp;
+      const total = el("div", `${MONO};font-size:12.5px;color:#9aa7b6;text-align:right`, fmt(x.total));
+      row.append(name, total, pctBar(pctCrit, "#f85149"), pctBar(pctOpen, "#f0883e"));
+      box.appendChild(row);
+    });
+  }
+  function pctBar(pct, color) {
+    const wrap = el("div", "display:flex;align-items:center;gap:8px;justify-content:flex-end");
+    const track = el("div", "flex:1;max-width:78px;height:8px;border-radius:5px;background:rgba(255,255,255,0.05);overflow:hidden");
+    track.appendChild(el("div", `height:100%;border-radius:5px;width:${Math.max(2, pct)}%;background:${color}`));
+    wrap.append(track, el("div", `${MONO};font-size:12px;color:#c9d3de;min-width:34px;text-align:right`, pct + "%"));
+    return wrap;
   }
 
   /* ── ISPs: fusionar por nombre lindo, top 6 ─────────────────── */
