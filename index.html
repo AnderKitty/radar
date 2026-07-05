@@ -207,6 +207,16 @@
         <div style="font-size:12.5px;color:#5f6b7a;margin-bottom:18px">Repositorios git, archivos <code style="font-family:'IBM Plex Mono',monospace;color:#c9d3de;font-size:12px">.env</code> y otros recursos que filtran credenciales o código, detectados por firma — nunca se guarda el contenido.</div>
         <div id="webexp-bars" style="display:flex;flex-direction:column;gap:13px"></div>
       </div>
+
+      <div id="external-card" style="display:none;padding:26px;border-radius:16px;background:#0e141d;border:1px dashed rgba(255,255,255,0.14);margin-top:16px">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;margin-bottom:4px">Fuera de Uruguay <span style="font-weight:400;font-size:12.5px;color:#5f6b7a">· sección aparte</span></div>
+        <div style="font-size:12.5px;color:#5f6b7a;margin-bottom:18px">Rangos que se ven o geolocalizan en Uruguay pero están asignados fuera del país (CDNs, bloques europeos). Se relevan por completitud, pero <strong style="color:#9aa7b6">no cuentan</strong> en las cifras nacionales de arriba.</div>
+        <div style="font-size:13px;color:#9aa7b6;margin-bottom:16px"><span id="external-total" style="font-family:'IBM Plex Mono',monospace;color:#e6edf3;font-size:15px">0</span> dispositivos · <span id="external-crit" style="font-family:'IBM Plex Mono',monospace;color:#f85149">0</span> críticos</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
+          <div><div style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#5f6b7a;margin-bottom:12px">Tipo de dispositivo</div><div id="external-dev" style="display:flex;flex-direction:column;gap:11px"></div></div>
+          <div><div style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#5f6b7a;margin-bottom:12px">Puertos</div><div id="external-port" style="display:flex;flex-direction:column;gap:11px"></div></div>
+        </div>
+      </div>
     </div>
   </section>
 

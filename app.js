@@ -104,7 +104,21 @@
     indexCard(d);
     ispRank(d.by_isp_detail || []);
     webExposCard(d.by_web_exposure || []);
+    externalCard(d.external);
     startCounters(targets);
+  }
+
+  /* ── Fuera de Uruguay (sección aparte) ──────────────────────── */
+  function externalCard(ext) {
+    const card = $("#external-card");
+    if (!card || !ext || !ext.total_devices) return;
+    card.style.display = "block";
+    $("#external-total").textContent = fmt(ext.total_devices);
+    $("#external-crit").textContent = fmt((ext.by_criticality || {}).CRITICAL || 0);
+    barChart("#external-dev", (ext.by_device_type || []).slice(0, 6)
+      .map((x) => ({ label: devLabel(x.key), value: x.count, color: devColor(x.key) })), "110px,140px");
+    barChart("#external-port", (ext.by_port || []).slice(0, 6)
+      .map((x) => ({ label: portLabel(x.key), value: x.count, color: "#8b98a5" })), "110px,140px");
   }
 
   /* ── Exposiciones web sensibles ─────────────────────────────── */
