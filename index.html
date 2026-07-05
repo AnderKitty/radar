@@ -201,6 +201,12 @@
         <div style="font-size:12.5px;color:#5f6b7a;margin-bottom:18px">De los equipos expuestos de cada operador, qué porcentaje es crítico o está accesible sin autenticación. Normaliza por tamaño del operador.</div>
         <div id="isp-rank"></div>
       </div>
+
+      <div id="webexp-card" style="display:none;padding:26px;border-radius:16px;background:linear-gradient(180deg,rgba(248,81,73,0.06),transparent);border:1px solid rgba(248,81,73,0.24);margin-top:16px">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;margin-bottom:4px">Exposiciones web sensibles</div>
+        <div style="font-size:12.5px;color:#5f6b7a;margin-bottom:18px">Repositorios git, archivos <code style="font-family:'IBM Plex Mono',monospace;color:#c9d3de;font-size:12px">.env</code> y otros recursos que filtran credenciales o código, detectados por firma — nunca se guarda el contenido.</div>
+        <div id="webexp-bars" style="display:flex;flex-direction:column;gap:13px"></div>
+      </div>
     </div>
   </section>
 

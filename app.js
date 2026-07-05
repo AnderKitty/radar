@@ -103,7 +103,24 @@
     trend(d.history || []);
     indexCard(d);
     ispRank(d.by_isp_detail || []);
+    webExposCard(d.by_web_exposure || []);
     startCounters(targets);
+  }
+
+  /* ── Exposiciones web sensibles ─────────────────────────────── */
+  const WEBEXP_LABEL = {
+    exposed_git: "Repos git expuestos",
+    exposed_env: "Archivos .env expuestos",
+    exposed_server_status: "Apache server-status",
+    open_dir_listing: "Listados de directorio",
+  };
+  function webExposCard(list) {
+    if (!$("#webexp-bars") || !list.length) return;
+    const card = $("#webexp-card");
+    if (card) card.style.display = "block";
+    barChart("#webexp-bars", list.map((x) => ({
+      label: WEBEXP_LABEL[x.key] || x.key, value: x.count, color: "#f85149",
+    })), "150px,190px");
   }
 
   /* ── Índice de Exposición ───────────────────────────────────── */
