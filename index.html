@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Radar.uy · Lo que Uruguay dejó abierto en internet</title>
-<meta name="description" content="Observatorio público de exposición: cuántos dispositivos y servicios uruguayos quedan accesibles desde internet. Solo estadísticas agregadas — nunca IPs, hostnames ni datos de un equipo concreto.">
+<title>Radar · Lo que Uruguay dejó abierto en internet</title>
+<meta name="description" content="Observatorio público de exposición: cuántos dispositivos y servicios uruguayos quedan accesibles desde internet. Solo estadísticas agregadas: nunca IPs, hostnames ni datos de un equipo concreto.">
 <meta name="color-scheme" content="dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
           <span style="width:5px;height:5px;border-radius:50%;background:#4493f8"></span>
           <span style="position:absolute;inset:0;border:1.5px solid #4493f8;border-radius:50%;animation:ping 2.8s ease-out infinite"></span>
         </span>
-        <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;letter-spacing:-0.01em">Radar<span style="color:#5f6b7a;font-weight:400">.uy</span></span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;letter-spacing:-0.01em">Radar</span>
       </a>
       <div style="display:flex;align-items:center;gap:26px;font-size:13.5px;color:#9aa7b6;font-weight:500;flex-wrap:wrap;justify-content:flex-end">
         <a href="#numeros" style="text-decoration:none">Números</a>
@@ -57,7 +57,7 @@
       </h1>
 
       <p style="font-size:clamp(16px,1.7vw,20px);color:#9aa7b6;max-width:60ch;margin:24px 0 0;line-height:1.6">
-        Radar mide, de forma <strong style="color:#e6edf3;font-weight:600">pasiva</strong> y sin acceder a ningún equipo, cuántos dispositivos y servicios quedaron accesibles desde internet en los rangos de IP asignados a Uruguay. Publicamos <strong style="color:#e6edf3;font-weight:600">solo estadísticas</strong> — nunca direcciones, nunca la información de un equipo concreto.
+        Medimos, de forma <strong style="color:#e6edf3;font-weight:600">pasiva</strong> y sin tocar ningún equipo, cuántos dispositivos y servicios uruguayos quedaron accesibles desde internet. Publicamos <strong style="color:#e6edf3;font-weight:600">solo estadísticas</strong>: nunca direcciones IP ni los datos de un equipo puntual.
       </p>
 
       <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:36px">
@@ -123,7 +123,7 @@
   <section id="panorama" style="padding:56px 28px">
     <div style="max-width:1160px;margin:0 auto">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:#4493f8">El panorama</div>
-      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(28px,3.4vw,40px);letter-spacing:-0.02em;margin:12px 0 0">Qué encontramos, en agregado</h2>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(28px,3.4vw,40px);letter-spacing:-0.02em;margin:12px 0 0">Qué encontramos</h2>
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;margin-top:34px">
         <div style="padding:26px;border-radius:16px;background:#0e141d;border:1px solid rgba(255,255,255,0.07)">
@@ -152,7 +152,7 @@
         </div>
         <div style="padding:26px;border-radius:16px;background:#0e141d;border:1px solid rgba(255,255,255,0.07)">
           <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;margin-bottom:6px">CVE más frecuentes</div>
-          <div style="font-size:12px;color:#5f6b7a;margin-bottom:18px">Inferidos por versión o modelo detectado — nunca explotados.</div>
+          <div style="font-size:12px;color:#5f6b7a;margin-bottom:18px">Inferidos por la versión o el modelo detectado. Nunca se explotan.</div>
           <div id="cve-rows" style="display:flex;flex-direction:column"></div>
         </div>
       </div>
@@ -172,7 +172,7 @@
   <section id="alcance" style="padding:56px 28px;border-top:1px solid rgba(255,255,255,0.06)">
     <div style="max-width:1160px;margin:0 auto">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:#4493f8">Transparencia</div>
-      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(28px,3.4vw,40px);letter-spacing:-0.02em;margin:12px 0 0;max-width:20ch">Qué hace Radar — y qué no hace</h2>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(28px,3.4vw,40px);letter-spacing:-0.02em;margin:12px 0 0;max-width:20ch">Qué hace Radar y qué no</h2>
       <p style="color:#9aa7b6;max-width:62ch;margin:16px 0 0">Radar hace reconocimiento <strong style="color:#e6edf3">pasivo</strong>: observa lo que los propios servicios publican de cara a internet, igual que buscadores como Shodan o Censys. Nunca entra a ningún sistema.</p>
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:34px">
@@ -268,11 +268,11 @@
         </div>
         <div style="padding:26px;border-radius:16px;background:#0e141d;border:1px solid rgba(255,255,255,0.07)">
           <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin-bottom:10px">Fingerprint + CVE por versión</div>
-          <p style="font-size:14px;color:#9aa7b6;line-height:1.6">La marca sale de firmas comparadas contra un campo específico (nunca un blob mezclado). La versión publicada se cruza contra una tabla versión→CVE; el CVE se anota como <code style="font-family:'IBM Plex Mono',monospace;color:#c9d3de;font-size:12.5px">confirmed:false</code> — inferido, no explotado.</p>
+          <p style="font-size:14px;color:#9aa7b6;line-height:1.6">La marca sale de firmas comparadas contra un campo específico (nunca un blob mezclado). La versión publicada se cruza contra una tabla versión→CVE; el CVE se anota como <code style="font-family:'IBM Plex Mono',monospace;color:#c9d3de;font-size:12.5px">confirmed:false</code> (inferido, no explotado).</p>
         </div>
         <div style="padding:26px;border-radius:16px;background:#0e141d;border:1px solid rgba(255,255,255,0.07)">
           <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin-bottom:10px">Solo agregados salen a la web</div>
-          <p style="font-size:14px;color:#9aa7b6;line-height:1.6">Un generador de estadísticas produce un <code style="font-family:'IBM Plex Mono',monospace;color:#c9d3de;font-size:12.5px">stats.json</code> con solo conteos. Un test automatizado falla si cualquier dato accionable —IP, hostname, banner o coordenada— se filtra a la salida pública.</p>
+          <p style="font-size:14px;color:#9aa7b6;line-height:1.6">Un generador de estadísticas produce un <code style="font-family:'IBM Plex Mono',monospace;color:#c9d3de;font-size:12.5px">stats.json</code> con solo conteos. Un test automatizado falla si cualquier dato sensible (IP, hostname, banner o coordenada) se filtra a la salida pública.</p>
         </div>
       </div>
 
@@ -281,7 +281,7 @@
           <span style="width:10px;height:10px;border-radius:50%;background:#f85149"></span>
           <span style="width:10px;height:10px;border-radius:50%;background:#d4a72c"></span>
           <span style="width:10px;height:10px;border-radius:50%;background:#3fb950"></span>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5f6b7a;margin-left:8px">lo que se publica — stats.json (fragmento)</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5f6b7a;margin-left:8px">lo que se publica: stats.json (fragmento)</span>
         </div>
         <pre style="margin:0;padding:22px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;line-height:1.75;color:#c9d3de;overflow-x:auto"><span style="color:#5f6b7a">{</span>
   <span style="color:#8cc0ff">"by_criticality"</span>: <span style="color:#5f6b7a">{</span> <span style="color:#8cc0ff">"CRITICAL"</span>: <span style="color:#f0883e">695</span>, <span style="color:#8cc0ff">"HIGH"</span>: <span style="color:#f0883e">64716</span> <span style="color:#5f6b7a">}</span>,
@@ -313,7 +313,7 @@
         </details>
         <details style="padding:20px 22px;border-radius:12px;background:#0e141d;border:1px solid rgba(255,255,255,0.07)">
           <summary style="cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15.5px">¿Es lo mismo que Shodan o Censys?</summary>
-          <p style="margin:14px 0 0;font-size:14px;color:#9aa7b6;line-height:1.6">La técnica es la misma —reconocimiento pasivo de servicios públicos— pero Radar está enfocado en Uruguay y publica solo estadísticas agregadas, no un buscador de equipos.</p>
+          <p style="margin:14px 0 0;font-size:14px;color:#9aa7b6;line-height:1.6">La técnica es la misma (reconocimiento pasivo de servicios públicos), pero Radar está enfocado en Uruguay y publica solo estadísticas agregadas, no un buscador de equipos.</p>
         </details>
       </div>
     </div>
@@ -322,7 +322,7 @@
   <section id="publicos" style="padding:56px 28px;border-top:1px solid rgba(255,255,255,0.06)">
     <div style="max-width:1080px;margin:0 auto">
       <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3vw,32px);margin:0 0 10px">Información pública accesible</h2>
-      <p style="color:#8b98a5;max-width:70ch;margin:0 0 6px">Directorio de recursos que el Estado y operadores ya publican como públicos: datos abiertos, APIs y cámaras de acceso libre. Verificado a mano — nada de equipos personales.</p>
+      <p style="color:#8b98a5;max-width:70ch;margin:0 0 6px">Directorio de recursos que el Estado y operadores ya publican como públicos: datos abiertos, APIs y cámaras de acceso libre. Verificado a mano, sin equipos personales.</p>
       <div id="reg-error" style="display:none;margin:14px 0;padding:12px 14px;border-radius:10px;background:rgba(248,81,73,0.08);border:1px solid rgba(248,81,73,0.3);color:#ffb3ae">No pudimos cargar el registro público. Probá recargar en un rato.</div>
       <div id="reg-filters" style="display:flex;flex-wrap:wrap;gap:8px;margin:18px 0"></div>
       <div id="reg-map" style="height:420px;border-radius:14px;overflow:hidden;margin-bottom:22px;background:#0e141d"></div>
@@ -355,7 +355,7 @@
             <span style="position:absolute;inset:0;border:1.5px solid #4493f8;border-radius:50%;opacity:.55"></span>
             <span style="width:4px;height:4px;border-radius:50%;background:#4493f8"></span>
           </span>
-          <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px">Radar<span style="color:#5f6b7a;font-weight:400">.uy</span></span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px">Radar</span>
           <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5f6b7a">· observatorio de exposición · Uruguay</span>
         </div>
         <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5f6b7a">Datos agregados · sin información sensible · <span class="updated">—</span></div>

@@ -14,6 +14,15 @@
   const devColor = (k) =>
     DEV_RED.has(k) ? "#f85149" : DEV_ORANGE.has(k) ? "#f0883e" : DEV_YELLOW.has(k) ? "#d4a72c" : "#4493f8";
 
+  const DEVLABEL = {
+    CAMERA: "Cámaras", EXPOSED_CAMERA: "Cámaras expuestas", WEB_SERVER: "Servidores web",
+    SERVER: "Servidores", HOST: "Hosts", ROUTER: "Routers", REMOTE_ACCESS: "Accesos remotos",
+    ADMIN_PANEL: "Paneles de administración", EXPOSED_DATABASE: "Bases de datos expuestas",
+    EXPOSED_SERVICE: "Servicios expuestos", "ICS/SCADA": "Control industrial", IOT_DEVICE: "Dispositivos IoT",
+    NETWORK_DEVICE: "Equipos de red", PRINTER: "Impresoras", HONEYPOT: "Honeypots", CDN_EDGE: "Nodos CDN",
+  };
+  const devLabel = (k) => DEVLABEL[k] || k;
+
   const PORTNAME = {
     80: "HTTP", 443: "HTTPS", 22: "SSH", 554: "RTSP", 81: "HTTP-alt", 8080: "HTTP-alt",
     8000: "HTTP-alt", 8001: "HTTP-alt", 8002: "HTTP-alt", 8081: "HTTP-alt",
@@ -80,7 +89,7 @@
     else $("#card-ips").style.display = "none";
 
     barChart("#device-bars", (d.by_device_type || []).slice(0, 9)
-      .map((x) => ({ label: x.key, value: x.count, color: devColor(x.key) })), "120px,150px");
+      .map((x) => ({ label: devLabel(x.key), value: x.count, color: devColor(x.key) })), "120px,150px");
     barChart("#brand-bars", (d.by_brand || []).slice(0, 8)
       .map((x) => ({ label: x.key, value: x.count, color: "#4493f8" })), "110px,130px");
     barChart("#isp-bars", ispRows(d.by_isp || []).map((x) => ({ ...x, color: "#7c8dff" })), "110px,130px");
