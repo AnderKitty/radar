@@ -88,39 +88,29 @@
     <div style="max-width:1160px;margin:0 auto">
       <div id="load-error">No pudimos cargar los datos del último barrido. Probá recargar en un rato.</div>
 
-      <div id="index-card" style="display:none;padding:28px;border-radius:16px;background:linear-gradient(120deg,rgba(68,147,248,0.10),rgba(248,81,73,0.05));border:1px solid rgba(68,147,248,0.28);margin-bottom:16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px">
-          <div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#4493f8">Índice de Exposición · Uruguay</div>
-            <div style="display:flex;align-items:baseline;gap:12px;margin-top:8px">
-              <span id="index-num" style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:clamp(46px,6vw,68px);line-height:1;color:#e6edf3">0</span>
-              <span style="font-size:20px;color:#5f6b7a">/ 100</span>
-              <span id="index-trend" style="font-size:13.5px;color:#8b98a5"></span>
-            </div>
-          </div>
-          <div style="max-width:40ch;font-size:13px;color:#9aa7b6;line-height:1.55">Promedio de la <strong style="color:#c9d3de">gravedad ponderada</strong> de lo expuesto y el <strong style="color:#c9d3de">% de servicios accesibles sin autenticación</strong>. Más alto = más expuesto.</div>
-        </div>
-      </div>
-
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
         <div id="card-crit" style="padding:26px;border-radius:16px;background:linear-gradient(180deg,rgba(248,81,73,0.09),rgba(248,81,73,0.02));border:1px solid rgba(248,81,73,0.3);animation:radarPulse 2.4s ease-in-out infinite">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#f85149">Crítico</div>
           <div class="kpi-num" id="crit-n" data-kpi="crit" style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:clamp(38px,4.4vw,54px);line-height:1;margin-top:14px;color:#ffb3ae">0</div>
+          <div class="kpi-delta" id="crit-delta" style="font-family:'IBM Plex Mono',monospace;font-size:12px;margin-top:8px;min-height:16px;color:#8b98a5"></div>
           <div style="font-size:13px;color:#9aa7b6;margin-top:12px;line-height:1.45">Servicios accesibles sin autenticación: cámaras, bases de datos, control industrial.</div>
         </div>
         <div style="padding:26px;border-radius:16px;background:#0e141d;border:1px solid rgba(240,136,62,0.24)">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#f0883e">Alto</div>
           <div class="kpi-num" id="high-n" data-kpi="high" style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:clamp(38px,4.4vw,54px);line-height:1;margin-top:14px;color:#f0883e">0</div>
+          <div class="kpi-delta" id="high-delta" style="font-family:'IBM Plex Mono',monospace;font-size:12px;margin-top:8px;min-height:16px;color:#8b98a5"></div>
           <div style="font-size:13px;color:#9aa7b6;margin-top:12px;line-height:1.45">Paneles de administración, accesos remotos y bases de datos protegidas pero expuestas.</div>
         </div>
         <div style="padding:26px;border-radius:16px;background:#0e141d;border:1px solid rgba(212,167,44,0.22)">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#d4a72c">Medio</div>
           <div class="kpi-num" id="med-n" data-kpi="med" style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:clamp(38px,4.4vw,54px);line-height:1;margin-top:14px;color:#d4a72c">0</div>
+          <div class="kpi-delta" id="med-delta" style="font-family:'IBM Plex Mono',monospace;font-size:12px;margin-top:8px;min-height:16px;color:#8b98a5"></div>
           <div style="font-size:13px;color:#9aa7b6;margin-top:12px;line-height:1.45">Routers, servidores web e impresoras identificados en la red pública.</div>
         </div>
         <div style="padding:26px;border-radius:16px;background:#0e141d;border:1px solid rgba(68,147,248,0.22)">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#4493f8">Bajo</div>
           <div class="kpi-num" id="low-n" data-kpi="low" style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:clamp(38px,4.4vw,54px);line-height:1;margin-top:14px;color:#4493f8">0</div>
+          <div class="kpi-delta" id="low-delta" style="font-family:'IBM Plex Mono',monospace;font-size:12px;margin-top:8px;min-height:16px;color:#8b98a5"></div>
           <div style="font-size:13px;color:#9aa7b6;margin-top:12px;line-height:1.45">Hosts vivos con algún puerto abierto, sin riesgo adicional detectado.</div>
         </div>
       </div>

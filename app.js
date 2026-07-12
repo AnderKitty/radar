@@ -101,7 +101,7 @@
     authChart(auth);
     cveList(d.by_cve || []);
     trend(d.history || []);
-    indexCard(d);
+    criticalityDeltas(d);
     ispRank(d.by_isp_detail || []);
     webExposCard(d.by_web_exposure || []);
     externalCard(d.external);
@@ -137,22 +137,30 @@
     })), "150px,190px");
   }
 
-  /* ── Índice de Exposición ───────────────────────────────────── */
-  function indexCard(d) {
-    if (d.exposure_index == null) return;
-    const card = $("#index-card");
-    if (!card) return;
-    card.style.display = "block";
-    $("#index-num").textContent = d.exposure_index;
+  /* ── Deltas por criticidad vs. ayer ─────────────────────────────
+     Bajo cada contador (crítico/alto/medio/bajo) mostramos cuánto subió o
+     bajó respecto del barrido anterior. El día previo es la penúltima fila del
+     history; hoy es d.by_criticality. Rojo = subió (más exposición), verde =
+     bajó. Si el día previo no registró esa métrica (history vieja sin
+     medium/low) no mostramos nada, para no comparar contra un cero falso. */
+  function criticalityDeltas(d) {
+    const c = d.by_criticality || {};
     const h = d.history || [];
-    const t = $("#index-trend");
-    // Solo mostramos tendencia si el día previo ya tenía índice (>0): así no
-    // saltamos contra días viejos anteriores a esta métrica.
-    if (t && h.length >= 2 && h[h.length - 2].index > 0) {
-      const delta = (h[h.length - 1].index || 0) - h[h.length - 2].index;
-      if (delta > 0) { t.textContent = "▲ +" + delta + " vs. ayer"; t.style.color = "#f85149"; }
-      else if (delta < 0) { t.textContent = "▼ " + delta + " vs. ayer"; t.style.color = "#3fb950"; }
-      else { t.textContent = "sin cambios vs. ayer"; t.style.color = "#8b98a5"; }
+    const prev = h.length >= 2 ? h[h.length - 2] : null;
+    const map = [
+      ["#crit-delta", "CRITICAL", "critical"],
+      ["#high-delta", "HIGH", "high"],
+      ["#med-delta", "MEDIUM", "medium"],
+      ["#low-delta", "LOW", "low"],
+    ];
+    for (const [sel, critKey, histKey] of map) {
+      const node = $(sel);
+      if (!node) continue;
+      if (!prev || prev[histKey] == null) { node.textContent = ""; continue; }
+      const delta = (c[critKey] || 0) - prev[histKey];
+      if (delta > 0) { node.textContent = "▲ +" + fmt(delta) + " vs. ayer"; node.style.color = "#f85149"; }
+      else if (delta < 0) { node.textContent = "▼ −" + fmt(Math.abs(delta)) + " vs. ayer"; node.style.color = "#3fb950"; }
+      else { node.textContent = "= sin cambios vs. ayer"; node.style.color = "#8b98a5"; }
     }
   }
 
