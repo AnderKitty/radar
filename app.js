@@ -102,6 +102,7 @@
     cveList(d.by_cve || []);
     trend(d.history || []);
     criticalityDeltas(d);
+    persistentNote(d);
     ispRank(d.by_isp_detail || []);
     webExposCard(d.by_web_exposure || []);
     externalCard(d.external);
@@ -162,6 +163,22 @@
       else if (delta < 0) { node.textContent = "▼ −" + fmt(Math.abs(delta)) + " vs. ayer"; node.style.color = "#3fb950"; }
       else { node.textContent = "= sin cambios vs. ayer"; node.style.color = "#8b98a5"; }
     }
+  }
+
+  /* ── Persistencia: cuántos críticos son exposición durable ──────
+     De los N críticos del día, cuántos son exposición ESTABLE (IP estática
+     o racha ≥3 barridos) y no churn de IP dinámica (~68% de los "críticos"
+     son dinámicas que rotan y mueren). Si statsgen no emite el campo (binario
+     viejo), no mostramos nada. */
+  function persistentNote(d) {
+    const node = $("#crit-persist");
+    if (!node) return;
+    const p = d.persistent_by_criticality;
+    const crit = (d.by_criticality || {}).CRITICAL || 0;
+    if (!p || p.CRITICAL == null || !crit) { node.textContent = ""; return; }
+    const real = p.CRITICAL;
+    const pct = Math.round((100 * real) / crit);
+    node.textContent = "▪ " + fmt(real) + " reales (" + pct + "%) · exposición durable, no IP dinámica";
   }
 
   /* ── Ranking por operador (ISP) ─────────────────────────────── */

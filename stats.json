@@ -1,12 +1,18 @@
 {
   "scan_date": "2026-07-15",
-  "generated_at": "2026-07-15T16:03:49Z",
+  "generated_at": "2026-07-15T22:00:53Z",
   "total_devices": 59330,
   "by_criticality": {
     "CRITICAL": 177,
     "HIGH": 25661,
     "LOW": 18163,
     "MEDIUM": 15329
+  },
+  "persistent_by_criticality": {
+    "CRITICAL": 31,
+    "HIGH": 3274,
+    "LOW": 6527,
+    "MEDIUM": 7453
   },
   "by_auth_state": {
     "auth-required": 2563,
