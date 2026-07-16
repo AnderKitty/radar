@@ -171,14 +171,25 @@
      son dinámicas que rotan y mueren). Si statsgen no emite el campo (binario
      viejo), no mostramos nada. */
   function persistentNote(d) {
-    const node = $("#crit-persist");
-    if (!node) return;
-    const p = d.persistent_by_criticality;
-    const crit = (d.by_criticality || {}).CRITICAL || 0;
-    if (!p || p.CRITICAL == null || !crit) { node.textContent = ""; return; }
-    const real = p.CRITICAL;
-    const pct = Math.round((100 * real) / crit);
-    node.textContent = "▪ " + fmt(real) + " reales (" + pct + "%) · exposición durable, no IP dinámica";
+    const p = d.persistent_by_criticality || {};
+    const c = d.by_criticality || {};
+    const map = [
+      ["#crit-persist", "CRITICAL", true],
+      ["#high-persist", "HIGH", false],
+      ["#med-persist", "MEDIUM", false],
+      ["#low-persist", "LOW", false],
+    ];
+    for (const [sel, key, withHint] of map) {
+      const node = $(sel);
+      if (!node) continue;
+      const total = c[key] || 0;
+      // Sin el campo (statsgen viejo) o sin hallazgos → no mostramos nada.
+      if (p[key] == null || !total) { node.textContent = ""; continue; }
+      const real = p[key];
+      const pct = Math.round((100 * real) / total);
+      node.textContent = "▪ " + fmt(real) + " reales (" + pct + "%)" +
+        (withHint ? " · exposición durable, no IP dinámica" : "");
+    }
   }
 
   /* ── Ranking por operador (ISP) ─────────────────────────────── */
