@@ -42,6 +42,36 @@ details[open] summary::before{content:"− "}
   [style*="radarSweep"],[style*="ping"],[style*="radarPulse"]{animation:none!important}
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   Responsive — teléfonos. El layout ya usa grids auto-fit (colapsan a
+   una columna solos) y barras en flex; lo que faltaba era achicar el
+   padding lateral (28px se come mucho en 360px) y la columna de label
+   de las barras en pantallas angostas. Todo el markup es inline-styled,
+   así que se sobrescribe con !important de forma acotada: por id de
+   sección/host, no global.
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width:640px){
+  header#top{padding:72px 18px 56px!important}
+  nav>div{padding-left:18px!important;padding-right:18px!important}
+  section[id]{padding-left:18px!important;padding-right:18px!important}
+  footer{padding-left:18px!important;padding-right:18px!important}
+  /* tarjetas: aflojar el padding interno grande */
+  [style*="padding:26px"]{padding:18px!important}
+  /* filas de barras: label más angosto para dar aire a la barra y al valor */
+  #device-bars>div,#brand-bars>div,#isp-bars>div,#port-bars>div,
+  #dept-bars>div,#external-dev>div,#external-port>div,#webexp-bars>div{
+    grid-template-columns:minmax(76px,96px) 1fr auto!important;gap:10px!important;
+  }
+  nav a{font-size:13px}
+}
+@media (max-width:380px){
+  header#top{padding-top:60px!important}
+  #device-bars>div,#brand-bars>div,#isp-bars>div,#port-bars>div,
+  #dept-bars>div,#external-dev>div,#external-port>div,#webexp-bars>div{
+    grid-template-columns:minmax(62px,82px) 1fr auto!important;
+  }
+}
+
 /* registro público */
 .reg-filter{cursor:pointer;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:#0e141d;color:#e6edf3;font-size:13px}
 .reg-filter:hover{border-color:#4493f8}
