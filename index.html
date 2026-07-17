@@ -41,6 +41,7 @@
       </a>
       <div style="display:flex;align-items:center;gap:26px;font-size:13.5px;color:#9aa7b6;font-weight:500;flex-wrap:wrap;justify-content:flex-end">
         <a href="#numeros" style="text-decoration:none">Números</a>
+        <a href="#higiene" style="text-decoration:none">Higiene</a>
         <a href="#alcance" style="text-decoration:none">Qué hace</a>
         <a href="#legal" style="text-decoration:none">Legalidad</a>
         <a href="#tecnico" style="text-decoration:none">Cómo funciona</a>
@@ -210,6 +211,32 @@
           <div><div style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#5f6b7a;margin-bottom:12px">Tipo de dispositivo</div><div id="external-dev" style="display:flex;flex-direction:column;gap:11px"></div></div>
           <div><div style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#5f6b7a;margin-bottom:12px">Puertos</div><div id="external-port" style="display:flex;flex-direction:column;gap:11px"></div></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HYGIENE: SPF/DMARC de dominios .uy -->
+  <section id="higiene" style="display:none;padding:56px 28px;border-top:1px solid rgba(255,255,255,0.06)">
+    <div style="max-width:1160px;margin:0 auto">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:#4493f8">Higiene de correo</div>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(28px,3.4vw,40px);letter-spacing:-0.02em;margin:12px 0 0">¿Se puede falsificar el correo de un dominio .uy?</h2>
+      <p style="font-size:15px;color:#9aa7b6;line-height:1.65;margin-top:14px;max-width:760px">SPF y DMARC son los registros DNS que impiden que cualquiera mande mails haciéndose pasar por un dominio. Medimos <span id="hyg-total" style="font-family:'IBM Plex Mono',monospace;color:#e6edf3">0</span> dominios <code style="font-family:'IBM Plex Mono',monospace;color:#c9d3de;font-size:13px">.uy</code> de forma <strong style="color:#c9d3de">pasiva</strong> (solo consultas DNS) y <strong style="color:#c9d3de">agregada</strong> (ningún dominio se publica). Ojo con la trampa: publicar los registros no alcanza — solo protegen si son <strong style="color:#c9d3de">estrictos</strong> (SPF <code style="font-family:'IBM Plex Mono',monospace;color:#c9d3de;font-size:12.5px">-all</code>) y se <strong style="color:#c9d3de">aplican</strong> (DMARC <code style="font-family:'IBM Plex Mono',monospace;color:#c9d3de;font-size:12.5px">quarantine/reject</code>).</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;margin-top:34px">
+        <div style="padding:26px;border-radius:16px;background:#0e141d;border:1px solid rgba(255,255,255,0.07)">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin-bottom:4px">SPF que realmente bloquea <span style="font-weight:400;color:#5f6b7a;font-size:12.5px">(<code style="font-family:'IBM Plex Mono',monospace;font-size:12px">-all</code>)</span></div>
+          <div style="font-size:12px;color:#5f6b7a;margin-bottom:18px">% de dominios con SPF estricto, por tipo</div>
+          <div id="hyg-spf" style="display:flex;flex-direction:column;gap:13px"></div>
+        </div>
+        <div style="padding:26px;border-radius:16px;background:#0e141d;border:1px solid rgba(255,255,255,0.07)">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin-bottom:4px">DMARC que se aplica <span style="font-weight:400;color:#5f6b7a;font-size:12.5px">(quarantine/reject)</span></div>
+          <div style="font-size:12px;color:#5f6b7a;margin-bottom:18px">% de dominios con DMARC efectivo, por tipo</div>
+          <div id="hyg-dmarc" style="display:flex;flex-direction:column;gap:13px"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;padding:16px 20px;border-radius:12px;background:rgba(68,147,248,0.06);border:1px solid rgba(68,147,248,0.18);font-size:13.5px;color:#9aa7b6;line-height:1.6">
+        De todos los <code style="font-family:'IBM Plex Mono',monospace;color:#c9d3de;font-size:12.5px">.uy</code> medidos, <strong id="hyg-spf-any" style="color:#e6edf3">0%</strong> publica SPF pero solo <strong id="hyg-spf-strict" style="color:#7ee787">0%</strong> lo hace estricto; <strong id="hyg-dmarc-any" style="color:#e6edf3">0%</strong> tiene DMARC y solo <strong id="hyg-dmarc-enf" style="color:#7ee787">0%</strong> lo aplica. Esa brecha entre <em>publicar</em> y <em>aplicar</em> es por donde entra la suplantación de identidad.
       </div>
     </div>
   </section>

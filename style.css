@@ -59,7 +59,8 @@ details[open] summary::before{content:"− "}
   [style*="padding:26px"]{padding:18px!important}
   /* filas de barras: label más angosto para dar aire a la barra y al valor */
   #device-bars>div,#brand-bars>div,#isp-bars>div,#port-bars>div,
-  #dept-bars>div,#external-dev>div,#external-port>div,#webexp-bars>div{
+  #dept-bars>div,#external-dev>div,#external-port>div,#webexp-bars>div,
+  #hyg-spf>div,#hyg-dmarc>div{
     grid-template-columns:minmax(76px,96px) 1fr auto!important;gap:10px!important;
   }
   nav a{font-size:13px}

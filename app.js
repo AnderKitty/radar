@@ -452,3 +452,68 @@ function loadPublicRegistry() {
     });
 }
 loadPublicRegistry();
+
+// ---- Higiene de correo .uy (SPF/DMARC, agregado) -------------------------
+(function () {
+  var BUCKET_LABEL = {
+    "gub.uy": "Gobierno", "com.uy": "Comercial", "edu.uy": "Educación",
+    "org.uy": "Organizaciones", "net.uy": "Red", "mil.uy": "Militar",
+  };
+  function pct(n, d) { return d ? Math.round((100 * n) / d) : 0; }
+  function gradeColor(p) { return p >= 50 ? "#3fb950" : p >= 25 ? "#d4a72c" : "#f85149"; }
+
+  function bars(hostId, rows) {
+    var host = document.getElementById(hostId);
+    if (!host) return;
+    host.textContent = "";
+    rows.forEach(function (r) {
+      var row = document.createElement("div");
+      row.style.cssText = "display:grid;grid-template-columns:minmax(96px,120px) 1fr auto;gap:12px;align-items:center";
+      var lbl = document.createElement("div");
+      lbl.style.cssText = "font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9aa7b6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis";
+      lbl.textContent = r.label; lbl.title = r.label;
+      var track = document.createElement("div");
+      track.style.cssText = "height:9px;border-radius:6px;background:rgba(255,255,255,0.05);overflow:hidden";
+      var fill = document.createElement("div");
+      fill.style.cssText = "height:100%;border-radius:6px;width:" + Math.max(2, r.pct) + "%;background:" + gradeColor(r.pct);
+      track.appendChild(fill);
+      var val = document.createElement("div");
+      val.style.cssText = "font-family:'IBM Plex Mono',monospace;font-size:12px;color:#e6edf3;min-width:38px;text-align:right";
+      val.textContent = r.pct + "%";
+      row.appendChild(lbl); row.appendChild(track); row.appendChild(val);
+      host.appendChild(row);
+    });
+  }
+
+  function render(h) {
+    if (!h || !h.by_bucket || !h.overall) return;
+    var section = document.getElementById("higiene");
+    if (section) section.style.display = "";
+    var total = h.total_domains || h.overall.total || 0;
+    var totalEl = document.getElementById("hyg-total");
+    if (totalEl) totalEl.textContent = total.toLocaleString("es-UY");
+
+    var o = h.overall;
+    var set = function (id, v) { var e = document.getElementById(id); if (e) e.textContent = v + "%"; };
+    set("hyg-spf-any", pct(o.with_spf, o.total));
+    set("hyg-spf-strict", pct(o.spf_enforced, o.total));
+    set("hyg-dmarc-any", pct(o.with_dmarc, o.total));
+    set("hyg-dmarc-enf", pct(o.dmarc_enforced, o.total));
+
+    var buckets = Object.keys(h.by_bucket).sort(function (a, b) {
+      return h.by_bucket[b].total - h.by_bucket[a].total;
+    });
+    var label = function (b) { return BUCKET_LABEL[b] || b; };
+    bars("hyg-spf", buckets.map(function (b) {
+      var c = h.by_bucket[b]; return { label: label(b), pct: pct(c.spf_enforced, c.total) };
+    }));
+    bars("hyg-dmarc", buckets.map(function (b) {
+      var c = h.by_bucket[b]; return { label: label(b), pct: pct(c.dmarc_enforced, c.total) };
+    }));
+  }
+
+  fetch("uy_hygiene.json", { cache: "no-store" })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(render)
+    .catch(function () { /* higiene es opcional: si falta el archivo, no se muestra */ });
+})();
