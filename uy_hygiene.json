@@ -1,20 +1,20 @@
 {
-  "generated": "2026-07-19T03:56:41Z",
+  "generated": "2026-07-20T21:06:37Z",
   "total_domains": 1787,
   "overall": {
     "total": 1787,
-    "with_spf": 1028,
-    "spf_enforced": 414,
-    "with_dmarc": 621,
-    "dmarc_enforced": 286
+    "with_spf": 1031,
+    "spf_enforced": 415,
+    "with_dmarc": 626,
+    "dmarc_enforced": 287
   },
   "by_bucket": {
     "com.uy": {
       "total": 791,
       "with_spf": 402,
-      "spf_enforced": 186,
+      "spf_enforced": 185,
       "with_dmarc": 271,
-      "dmarc_enforced": 147
+      "dmarc_enforced": 146
     },
     "edu.uy": {
       "total": 359,
@@ -25,10 +25,10 @@
     },
     "gub.uy": {
       "total": 164,
-      "with_spf": 113,
-      "spf_enforced": 76,
-      "with_dmarc": 90,
-      "dmarc_enforced": 64
+      "with_spf": 116,
+      "spf_enforced": 79,
+      "with_dmarc": 95,
+      "dmarc_enforced": 66
     },
     "mil.uy": {
       "total": 4,
@@ -47,7 +47,7 @@
     "org.uy": {
       "total": 408,
       "with_spf": 242,
-      "spf_enforced": 66,
+      "spf_enforced": 65,
       "with_dmarc": 120,
       "dmarc_enforced": 29
     }
