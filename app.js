@@ -235,12 +235,11 @@
     if (card) card.style.display = "block";
     box.textContent = "";
     list.slice(0, 8).forEach((x) => {
-      const pctCrit = x.total ? Math.round((100 * (x.critical || 0)) / x.total) : 0;
       const pctOpen = x.total ? Math.round((100 * (x.open || 0)) / x.total) : 0;
       const row = el("div", "rank-row");
       const name = el("div", "isp", x.isp);
       name.title = x.isp;
-      row.append(name, el("div", "num", fmt(x.total)), pctBar(pctCrit, "var(--crit)"), pctBar(pctOpen, "var(--high)"));
+      row.append(name, el("div", "num", fmt(x.total)), pctBar(pctOpen, "var(--high)"));
       box.appendChild(row);
     });
   }

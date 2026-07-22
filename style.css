@@ -268,7 +268,7 @@ section + section{border-top:1px solid var(--line-soft)}
 .tt .d{color:var(--ink-3);display:block;margin-top:2px}
 
 /* ranking ISP */
-.rank-head,.rank-row{display:grid;grid-template-columns:minmax(110px,1.5fr) 78px 1fr 1fr;gap:12px;align-items:center}
+.rank-head,.rank-row{display:grid;grid-template-columns:minmax(110px,1.5fr) 78px 1fr;gap:12px;align-items:center}
 .rank-head{padding-bottom:11px;border-bottom:1px solid var(--line-hair)}
 .rank-head span{font-family:var(--f-mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-4)}
 .rank-head span+span,.rank-row .num,.rank-row .pctwrap{text-align:right}
