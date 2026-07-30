@@ -1,6 +1,6 @@
 {
   "scan_date": "2026-07-29",
-  "generated_at": "2026-07-29T21:05:18Z",
+  "generated_at": "2026-07-30T04:58:44Z",
   "total_devices": 70332,
   "by_criticality": {
     "CRITICAL": 155,
@@ -9,10 +9,10 @@
     "MEDIUM": 18217
   },
   "persistent_by_criticality": {
-    "CRITICAL": 39,
-    "HIGH": 3682,
-    "LOW": 12296,
-    "MEDIUM": 9748
+    "CRITICAL": 44,
+    "HIGH": 5749,
+    "LOW": 13927,
+    "MEDIUM": 10791
   },
   "by_auth_state": {
     "auth-required": 2721,
@@ -505,25 +505,7 @@
   ],
   "history": [
     {
-      "date": "2026-07-03",
-      "total": 96606,
-      "critical": 695,
-      "high": 64716
-    },
-    {
-      "date": "2026-07-04",
-      "total": 42122,
-      "critical": 256,
-      "high": 25495
-    },
-    {
       "date": "2026-07-06",
-      "total": 60658,
-      "critical": 174,
-      "high": 26798
-    },
-    {
-      "date": "2026-07-07",
       "total": 60658,
       "critical": 174,
       "high": 26798
@@ -594,14 +576,6 @@
     },
     {
       "date": "2026-07-17",
-      "total": 59985,
-      "critical": 181,
-      "high": 26349,
-      "medium": 15380,
-      "low": 18075
-    },
-    {
-      "date": "2026-07-18",
       "total": 59985,
       "critical": 181,
       "high": 26349,
