@@ -1,64 +1,64 @@
 {
-  "scan_date": "2026-07-30",
-  "generated_at": "2026-07-30T21:01:51Z",
-  "total_devices": 69619,
+  "scan_date": "2026-07-31",
+  "generated_at": "2026-07-31T20:58:30Z",
+  "total_devices": 69330,
   "by_criticality": {
-    "CRITICAL": 144,
-    "HIGH": 27253,
-    "LOW": 24148,
-    "MEDIUM": 18074
+    "CRITICAL": 139,
+    "HIGH": 27064,
+    "LOW": 24120,
+    "MEDIUM": 18007
   },
   "persistent_by_criticality": {
-    "CRITICAL": 33,
-    "HIGH": 3729,
-    "LOW": 12362,
-    "MEDIUM": 9980
+    "CRITICAL": 34,
+    "HIGH": 3722,
+    "LOW": 12335,
+    "MEDIUM": 10041
   },
   "by_auth_state": {
-    "auth-required": 2735,
-    "open": 9343,
-    "unknown": 57541
+    "auth-required": 2705,
+    "open": 9256,
+    "unknown": 57369
   },
   "by_device_type": [
     {
       "key": "CAMERA",
-      "count": 23802
+      "count": 23637
     },
     {
       "key": "HOST",
-      "count": 23296
+      "count": 23250
     },
     {
       "key": "WEB_SERVER",
-      "count": 14388
+      "count": 14372
     },
     {
       "key": "ROUTER",
-      "count": 1112
-    },
-    {
-      "key": "SERVER",
-      "count": 902
+      "count": 1107
     },
     {
       "key": "REMOTE_ACCESS",
-      "count": 898
+      "count": 894
+    },
+    {
+      "key": "SERVER",
+      "count": 891
     },
     {
       "key": "ADMIN_PANEL",
-      "count": 884
+      "count": 876
     },
     {
       "key": "EXPOSED_DATABASE",
-      "count": 855
+      "count": 821
     },
     {
       "key": "HONEYPOT",
-      "count": 563
+      "count": 566
     },
     {
       "key": "NETWORK_DEVICE",
-      "count": 241
+      "count": 252
     },
     {
       "key": "TRANSPORT_SYSTEM",
@@ -66,7 +66,7 @@
     },
     {
       "key": "ICS/SCADA",
-      "count": 108
+      "count": 113
     },
     {
       "key": "IOT_DEVICE",
@@ -74,29 +74,29 @@
     },
     {
       "key": "EXPOSED_CAMERA",
-      "count": 44
+      "count": 36
     },
     {
       "key": "EXPOSED_SERVICE",
-      "count": 7
+      "count": 8
     }
   ],
   "by_brand": [
     {
       "key": "Hikvision",
-      "count": 1859
+      "count": 1838
     },
     {
       "key": "MikroTik",
-      "count": 1063
+      "count": 1055
     },
     {
       "key": "TP-Link",
-      "count": 249
+      "count": 248
     },
     {
       "key": "Xiongmai",
-      "count": 212
+      "count": 216
     },
     {
       "key": "Cisco",
@@ -104,15 +104,15 @@
     },
     {
       "key": "Ubiquiti",
-      "count": 94
+      "count": 102
     },
     {
       "key": "Tenda",
-      "count": 21
+      "count": 19
     },
     {
       "key": "Antel",
-      "count": 13
+      "count": 14
     },
     {
       "key": "Busmatick",
@@ -124,13 +124,13 @@
     },
     {
       "key": "D-Link",
-      "count": 2
+      "count": 1
     }
   ],
   "by_isp": [
     {
       "key": "Administracion Nacional de Telecomunicaciones",
-      "count": 59851
+      "count": 59591
     },
     {
       "key": "ZONAMERICA",
@@ -138,35 +138,35 @@
     },
     {
       "key": "Telefonica Moviles del Uruguay SA",
-      "count": 1819
+      "count": 1815
     },
     {
       "key": "Tecnowind S.A.",
-      "count": 1766
+      "count": 1755
     },
     {
       "key": "Uruguay",
-      "count": 636
+      "count": 617
     },
     {
       "key": "LACNIC - Latin American and Caribbean IP address",
-      "count": 385
+      "count": 386
     },
     {
       "key": "TELEMAS SOCIEDAD ANONIMA",
       "count": 285
     },
     {
-      "key": "Telstar S.A.",
+      "key": "Lunamen S.A.",
       "count": 272
     },
     {
-      "key": "Lunamen S.A.",
-      "count": 270
+      "key": "Telstar S.A.",
+      "count": 267
     },
     {
       "key": "LAUAM MEGARED TELECOM, S.R.L.",
-      "count": 171
+      "count": 173
     },
     {
       "key": "Cooperacion Latino Americana de Redes Avanzadas",
@@ -186,33 +186,33 @@
     },
     {
       "key": "AMAZON-02",
-      "count": 71
+      "count": 72
     }
   ],
   "by_port": [
     {
       "key": 80,
-      "count": 14947
+      "count": 14832
     },
     {
       "key": 554,
-      "count": 13533
+      "count": 13440
     },
     {
       "key": 8000,
-      "count": 12846
+      "count": 12718
     },
     {
       "key": 37777,
-      "count": 12369
+      "count": 12271
     },
     {
       "key": 8081,
-      "count": 10266
+      "count": 10258
     },
     {
       "key": 443,
-      "count": 9961
+      "count": 10011
     },
     {
       "key": 179,
@@ -220,217 +220,217 @@
     },
     {
       "key": 2000,
-      "count": 6733
+      "count": 6779
     },
     {
       "key": 5060,
-      "count": 4228
+      "count": 4250
     },
     {
       "key": 8080,
-      "count": 3780
+      "count": 3723
     },
     {
       "key": 81,
-      "count": 3749
+      "count": 3699
     },
     {
       "key": 22,
-      "count": 3660
+      "count": 3592
     },
     {
       "key": 53,
-      "count": 3556
+      "count": 3575
     },
     {
       "key": 8291,
-      "count": 3392
+      "count": 3401
     },
     {
       "key": 8001,
-      "count": 2996
+      "count": 2940
     }
   ],
   "by_cve": [
     {
       "key": "CVE-2017-7921",
-      "count": 1859
+      "count": 1838
     },
     {
       "key": "CVE-2021-36260",
-      "count": 1859
+      "count": 1838
     },
     {
       "key": "CVE-2018-14847",
-      "count": 1063
+      "count": 1055
     },
     {
       "key": "CVE-2024-6387",
-      "count": 649
+      "count": 653
     },
     {
       "key": "CVE-2015-3306",
-      "count": 7
+      "count": 6
+    },
+    {
+      "key": "CVE-2005-2089",
+      "count": 4
     },
     {
       "key": "CVE-2006-20001",
-      "count": 5
+      "count": 4
     },
     {
       "key": "CVE-2007-4723",
-      "count": 5
+      "count": 4
+    },
+    {
+      "key": "CVE-2008-1446",
+      "count": 4
     },
     {
       "key": "CVE-2009-0796",
-      "count": 5
+      "count": 4
+    },
+    {
+      "key": "CVE-2009-1535",
+      "count": 4
     },
     {
       "key": "CVE-2009-2299",
-      "count": 5
+      "count": 4
     },
     {
-      "key": "CVE-2011-1176",
-      "count": 5
+      "key": "CVE-2009-2521",
+      "count": 4
     },
     {
-      "key": "CVE-2011-2688",
-      "count": 5
+      "key": "CVE-2009-4444",
+      "count": 4
     },
     {
-      "key": "CVE-2012-3526",
-      "count": 5
-    },
-    {
-      "key": "CVE-2012-4001",
-      "count": 5
-    },
-    {
-      "key": "CVE-2012-4360",
-      "count": 5
-    },
-    {
-      "key": "CVE-2013-0941",
-      "count": 5
+      "key": "CVE-2009-4445",
+      "count": 4
     }
   ],
   "by_department": [
     {
       "key": "Montevideo",
-      "count": 47555
+      "count": 47487
     },
     {
       "key": "Maldonado",
-      "count": 4373
-    },
-    {
-      "key": "Artigas",
-      "count": 1681
+      "count": 4295
     },
     {
       "key": "Paysandú",
-      "count": 1654
+      "count": 1669
+    },
+    {
+      "key": "Artigas",
+      "count": 1639
     },
     {
       "key": "Durazno",
-      "count": 1501
-    },
-    {
-      "key": "Lavalleja",
-      "count": 1423
+      "count": 1549
     },
     {
       "key": "Canelones",
-      "count": 1368
+      "count": 1416
+    },
+    {
+      "key": "Lavalleja",
+      "count": 1309
     },
     {
       "key": "San José",
-      "count": 1293
+      "count": 1270
     },
     {
       "key": "Cerro Largo",
-      "count": 1192
+      "count": 1205
     },
     {
       "key": "Salto",
-      "count": 1126
+      "count": 1091
     },
     {
       "key": "Florida",
-      "count": 1014
+      "count": 1039
     },
     {
       "key": "Tacuarembó",
-      "count": 919
+      "count": 883
     },
     {
       "key": "Soriano",
-      "count": 813
+      "count": 828
     },
     {
       "key": "Rocha",
-      "count": 718
-    },
-    {
-      "key": "Rivera",
-      "count": 648
-    },
-    {
-      "key": "Treinta y Tres",
-      "count": 644
+      "count": 705
     },
     {
       "key": "Flores",
-      "count": 617
+      "count": 623
+    },
+    {
+      "key": "Rivera",
+      "count": 611
+    },
+    {
+      "key": "Treinta y Tres",
+      "count": 610
     },
     {
       "key": "Colonia",
-      "count": 584
+      "count": 565
     },
     {
       "key": "Río Negro",
-      "count": 496
+      "count": 536
     }
   ],
   "by_web_exposure": [],
   "by_isp_detail": [
     {
       "isp": "ANTEL",
-      "total": 59851,
-      "critical": 128,
-      "high": 25882,
-      "open": 7772
+      "total": 59591,
+      "critical": 127,
+      "high": 25694,
+      "open": 7675
     },
     {
       "isp": "ZONAMERICA",
       "total": 2988,
-      "critical": 3,
-      "high": 24,
-      "open": 69
+      "critical": 4,
+      "high": 25,
+      "open": 70
     },
     {
       "isp": "Movistar",
-      "total": 1823,
-      "critical": 3,
-      "high": 123,
-      "open": 172
+      "total": 1819,
+      "critical": 1,
+      "high": 125,
+      "open": 175
     },
     {
       "isp": "Tecnowind S.A.",
-      "total": 1766,
+      "total": 1755,
       "critical": 1,
-      "high": 659,
-      "open": 203
+      "high": 650,
+      "open": 205
     },
     {
       "isp": "Uruguay",
-      "total": 636,
+      "total": 617,
       "critical": 2,
-      "high": 77,
+      "high": 66,
       "open": 216
     },
     {
       "isp": "LACNIC - Latin American and Caribbean IP address",
-      "total": 385,
+      "total": 386,
       "critical": 0,
       "high": 13,
       "open": 52
@@ -443,32 +443,32 @@
       "open": 4
     },
     {
-      "isp": "Telstar S.A.",
-      "total": 272,
-      "critical": 7,
-      "high": 42,
-      "open": 40
-    },
-    {
       "isp": "Lunamen S.A.",
-      "total": 270,
+      "total": 272,
       "critical": 0,
       "high": 10,
-      "open": 48
+      "open": 49
+    },
+    {
+      "isp": "Telstar S.A.",
+      "total": 267,
+      "critical": 4,
+      "high": 42,
+      "open": 39
     },
     {
       "isp": "LAUAM MEGARED TELECOM, S.R.L.",
-      "total": 171,
+      "total": 173,
       "critical": 0,
-      "high": 55,
-      "open": 49
+      "high": 71,
+      "open": 51
     },
     {
       "isp": "Cooperacion Latino Americana de Redes Avanzadas",
       "total": 127,
       "critical": 0,
-      "high": 31,
-      "open": 73
+      "high": 30,
+      "open": 72
     },
     {
       "isp": "AMAZON-AES",
@@ -481,7 +481,7 @@
       "isp": "HOSTING EN LA WEB S.A.S.",
       "total": 94,
       "critical": 0,
-      "high": 23,
+      "high": 24,
       "open": 73
     },
     {
@@ -493,7 +493,7 @@
     },
     {
       "isp": "AMAZON-02",
-      "total": 71,
+      "total": 72,
       "critical": 0,
       "high": 4,
       "open": 54
@@ -665,6 +665,14 @@
       "high": 27253,
       "medium": 18074,
       "low": 24148
+    },
+    {
+      "date": "2026-07-31",
+      "total": 69330,
+      "critical": 139,
+      "high": 27064,
+      "medium": 18007,
+      "low": 24120
     }
   ],
   "external": {
