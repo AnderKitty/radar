@@ -1,15 +1,226 @@
 {
-  "scan_date": "2026-08-12",
-  "generated_at": "2026-08-12T09:47:32Z",
-  "total_devices": 0,
-  "by_criticality": {},
-  "by_auth_state": {},
-  "by_device_type": [],
+  "scan_date": "2026-08-11",
+  "generated_at": "2026-08-12T14:29:26Z",
+  "total_devices": 77322,
+  "by_criticality": {
+    "CRITICAL": 106,
+    "HIGH": 15809,
+    "LOW": 21659,
+    "MEDIUM": 39748
+  },
+  "persistent_by_criticality": {
+    "CRITICAL": 12,
+    "HIGH": 633,
+    "LOW": 1471,
+    "MEDIUM": 1263
+  },
+  "by_auth_state": {
+    "auth-required": 4265,
+    "open": 8407,
+    "unknown": 64650
+  },
+  "by_device_type": [
+    {
+      "key": "WEB_SERVER",
+      "count": 37458
+    },
+    {
+      "key": "HOST",
+      "count": 20870
+    },
+    {
+      "key": "ICS/SCADA",
+      "count": 5634
+    },
+    {
+      "key": "CAMERA",
+      "count": 4266
+    },
+    {
+      "key": "EXPOSED_DATABASE",
+      "count": 2390
+    },
+    {
+      "key": "SERVER",
+      "count": 1980
+    },
+    {
+      "key": "REMOTE_ACCESS",
+      "count": 1878
+    },
+    {
+      "key": "HONEYPOT",
+      "count": 563
+    },
+    {
+      "key": "ADMIN_PANEL",
+      "count": 548
+    },
+    {
+      "key": "ROUTER",
+      "count": 414
+    },
+    {
+      "key": "NETWORK_DEVICE",
+      "count": 190
+    },
+    {
+      "key": "IOT_DEVICE",
+      "count": 119
+    },
+    {
+      "key": "TRANSPORT_SYSTEM",
+      "count": 91
+    },
+    {
+      "key": "WEB_APP",
+      "count": 15
+    },
+    {
+      "key": "EXPOSED_SERVICE",
+      "count": 5
+    }
+  ],
   "by_brand": [],
   "by_isp": [],
-  "by_port": [],
-  "by_cve": [],
-  "by_department": [],
+  "by_port": [
+    {
+      "key": 443,
+      "count": 39170
+    },
+    {
+      "key": 80,
+      "count": 29573
+    },
+    {
+      "key": 22,
+      "count": 14423
+    },
+    {
+      "key": 7547,
+      "count": 12899
+    },
+    {
+      "key": 8443,
+      "count": 7961
+    },
+    {
+      "key": 179,
+      "count": 6563
+    },
+    {
+      "key": 502,
+      "count": 6140
+    },
+    {
+      "key": 8000,
+      "count": 4098
+    },
+    {
+      "key": 21,
+      "count": 3886
+    },
+    {
+      "key": 2000,
+      "count": 3364
+    },
+    {
+      "key": 37777,
+      "count": 3161
+    },
+    {
+      "key": 8080,
+      "count": 2893
+    },
+    {
+      "key": 3306,
+      "count": 2709
+    },
+    {
+      "key": 53,
+      "count": 2708
+    },
+    {
+      "key": 554,
+      "count": 2568
+    }
+  ],
+  "by_cve": [
+    {
+      "key": "CVE-2024-6387",
+      "count": 1396
+    },
+    {
+      "key": "CVE-2015-3306",
+      "count": 7
+    }
+  ],
+  "by_department": [
+    {
+      "key": "Artigas",
+      "count": 42564
+    },
+    {
+      "key": "Colonia",
+      "count": 14585
+    },
+    {
+      "key": "Montevideo",
+      "count": 4889
+    },
+    {
+      "key": "Rivera",
+      "count": 4818
+    },
+    {
+      "key": "Salto",
+      "count": 4221
+    },
+    {
+      "key": "Paysandú",
+      "count": 2223
+    },
+    {
+      "key": "Cerro Largo",
+      "count": 2063
+    },
+    {
+      "key": "Río Negro",
+      "count": 1297
+    },
+    {
+      "key": "Maldonado",
+      "count": 242
+    },
+    {
+      "key": "Durazno",
+      "count": 118
+    },
+    {
+      "key": "Tacuarembó",
+      "count": 102
+    },
+    {
+      "key": "Canelones",
+      "count": 89
+    },
+    {
+      "key": "Soriano",
+      "count": 59
+    },
+    {
+      "key": "Florida",
+      "count": 25
+    },
+    {
+      "key": "San José",
+      "count": 14
+    },
+    {
+      "key": "Treinta y Tres",
+      "count": 13
+    }
+  ],
   "by_web_exposure": [],
   "by_isp_detail": [],
   "history": [
@@ -236,6 +447,14 @@
       "low": 24136
     },
     {
+      "date": "2026-08-11",
+      "total": 77322,
+      "critical": 106,
+      "high": 15809,
+      "medium": 39748,
+      "low": 21659
+    },
+    {
       "date": "2026-08-12",
       "total": 0,
       "critical": 0,
@@ -243,5 +462,89 @@
       "medium": 0,
       "low": 0
     }
-  ]
+  ],
+  "external": {
+    "total_devices": 160,
+    "by_criticality": {
+      "LOW": 2,
+      "MEDIUM": 158
+    },
+    "by_device_type": [
+      {
+        "key": "WEB_SERVER",
+        "count": 158
+      },
+      {
+        "key": "HOST",
+        "count": 1
+      },
+      {
+        "key": "TRANSPORT_SYSTEM",
+        "count": 1
+      }
+    ],
+    "by_isp": [],
+    "by_port": [
+      {
+        "key": 443,
+        "count": 139
+      },
+      {
+        "key": 8082,
+        "count": 55
+      },
+      {
+        "key": 8081,
+        "count": 36
+      },
+      {
+        "key": 8443,
+        "count": 36
+      },
+      {
+        "key": 8080,
+        "count": 29
+      },
+      {
+        "key": 80,
+        "count": 24
+      },
+      {
+        "key": 8090,
+        "count": 7
+      },
+      {
+        "key": 53,
+        "count": 1
+      },
+      {
+        "key": 179,
+        "count": 1
+      },
+      {
+        "key": 8000,
+        "count": 1
+      },
+      {
+        "key": 8001,
+        "count": 1
+      },
+      {
+        "key": 8002,
+        "count": 1
+      },
+      {
+        "key": 8008,
+        "count": 1
+      },
+      {
+        "key": 10000,
+        "count": 1
+      },
+      {
+        "key": 10110,
+        "count": 1
+      }
+    ]
+  }
 }
