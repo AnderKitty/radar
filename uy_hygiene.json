@@ -1,19 +1,19 @@
 {
-  "generated": "2026-08-18T21:00:45Z",
+  "generated": "2026-08-19T21:03:03Z",
   "total_domains": 1935,
   "overall": {
     "total": 1935,
     "with_spf": 1121,
-    "spf_enforced": 468,
-    "with_dmarc": 691,
+    "spf_enforced": 466,
+    "with_dmarc": 692,
     "dmarc_enforced": 330
   },
   "by_bucket": {
     "com.uy": {
       "total": 791,
       "with_spf": 401,
-      "spf_enforced": 187,
-      "with_dmarc": 272,
+      "spf_enforced": 185,
+      "with_dmarc": 273,
       "dmarc_enforced": 145
     },
     "edu.uy": {
