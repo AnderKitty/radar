@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-25T21:01:01Z",
+  "generated": "2026-08-26T20:59:57Z",
   "total_domains": 1935,
   "overall": {
     "total": 1935,
-    "with_spf": 1119,
-    "spf_enforced": 465,
+    "with_spf": 1120,
+    "spf_enforced": 469,
     "with_dmarc": 693,
     "dmarc_enforced": 331
   },
@@ -12,7 +12,7 @@
     "com.uy": {
       "total": 791,
       "with_spf": 401,
-      "spf_enforced": 186,
+      "spf_enforced": 187,
       "with_dmarc": 273,
       "dmarc_enforced": 146
     },
@@ -25,8 +25,8 @@
     },
     "gub.uy": {
       "total": 292,
-      "with_spf": 189,
-      "spf_enforced": 127,
+      "with_spf": 190,
+      "spf_enforced": 129,
       "with_dmarc": 148,
       "dmarc_enforced": 104
     },
@@ -47,7 +47,7 @@
     "org.uy": {
       "total": 408,
       "with_spf": 244,
-      "spf_enforced": 65,
+      "spf_enforced": 66,
       "with_dmarc": 125,
       "dmarc_enforced": 31
     }
