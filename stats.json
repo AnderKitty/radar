@@ -1,6 +1,6 @@
 {
   "scan_date": "2026-08-27",
-  "generated_at": "2026-08-27T20:59:52Z",
+  "generated_at": "2026-08-27T21:39:47Z",
   "total_devices": 69263,
   "by_criticality": {
     "CRITICAL": 91,
@@ -15,30 +15,28 @@
     "MEDIUM": 10162
   },
   "by_auth_state": {
-    "auth-required": 2537,
-    "public-content": 8468,
-    "unauthenticated-control": 339,
+    "auth-required": 2570,
+    "public-content": 8678,
+    "unauthenticated-control": 48,
     "unauthenticated-data": 32,
-    "unauthenticated-info": 3466,
-    "unknown": 54421
+    "unauthenticated-info": 3488,
+    "unknown": 54447
   },
   "by_honeypot_class": {},
   "by_exposure": {
-    "unauthenticated-control": 339,
+    "unauthenticated-control": 48,
     "unauthenticated-data": 32,
-    "unauthenticated-info": 3466
+    "unauthenticated-info": 3488
   },
   "by_exposure_device": {
-    "ADMIN_PANEL": 205,
-    "CAMERA": 53,
+    "CAMERA": 3,
     "EXPOSED_CAMERA": 36,
-    "EXPOSED_DATABASE": 23,
+    "EXPOSED_DATABASE": 2,
     "EXPOSED_SERVICE": 9,
-    "ICS/SCADA": 7,
-    "IOT_DEVICE": 5,
-    "REMOTE_ACCESS": 14,
+    "ICS/SCADA": 6,
+    "IOT_DEVICE": 4,
+    "REMOTE_ACCESS": 4,
     "SERVER": 1,
-    "TRANSPORT_SYSTEM": 3,
     "WEB_SERVER": 15
   },
   "by_device_type": [
@@ -368,42 +366,42 @@
       "total": 58675,
       "critical": 75,
       "high": 25205,
-      "open": 3044
+      "open": 2802
     },
     {
       "isp": "ZONAMERICA",
       "total": 3001,
       "critical": 3,
       "high": 26,
-      "open": 17
+      "open": 15
     },
     {
       "isp": "Tecnowind S.A.",
       "total": 1795,
       "critical": 1,
       "high": 656,
-      "open": 55
+      "open": 46
     },
     {
       "isp": "Movistar",
       "total": 1761,
       "critical": 1,
       "high": 118,
-      "open": 77
+      "open": 74
     },
     {
       "isp": "Uruguay",
       "total": 619,
       "critical": 2,
       "high": 76,
-      "open": 170
+      "open": 167
     },
     {
       "isp": "LACNIC - Latin American and Caribbean IP address",
       "total": 383,
       "critical": 0,
       "high": 11,
-      "open": 23
+      "open": 22
     },
     {
       "isp": "TELEMAS SOCIEDAD ANONIMA",
@@ -417,14 +415,14 @@
       "total": 271,
       "critical": 0,
       "high": 10,
-      "open": 5
+      "open": 4
     },
     {
       "isp": "Telstar S.A.",
       "total": 269,
       "critical": 9,
       "high": 39,
-      "open": 33
+      "open": 32
     },
     {
       "isp": "AMAZON-AES",
@@ -438,21 +436,21 @@
       "total": 173,
       "critical": 0,
       "high": 71,
-      "open": 65
+      "open": 64
     },
     {
       "isp": "AMAZON-02",
       "total": 166,
       "critical": 0,
       "high": 4,
-      "open": 2
+      "open": 1
     },
     {
       "isp": "Cooperacion Latino Americana de Redes Avanzadas",
       "total": 130,
       "critical": 0,
       "high": 32,
-      "open": 7
+      "open": 6
     },
     {
       "isp": "PASWER INTERNATIONAL S.A.",
@@ -466,7 +464,7 @@
       "total": 100,
       "critical": 0,
       "high": 23,
-      "open": 58
+      "open": 57
     }
   ],
   "history": [
