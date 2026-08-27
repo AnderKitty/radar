@@ -229,7 +229,7 @@ section + section{border-top:1px solid var(--line-soft)}
 .bars{display:flex;flex-direction:column;gap:14px}
 .bar-row{display:grid;grid-template-columns:var(--barlabel,150px) 1fr auto;gap:13px;align-items:center}
 .bar-name{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);min-width:0}
-.bar-name .txt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-name .txt{white-space:normal;overflow-wrap:anywhere;line-height:1.25}
 .bar-flag{font-family:var(--f-mono);font-size:9.5px;font-weight:600;letter-spacing:.02em;padding:2px 6px;border-radius:5px;white-space:nowrap;flex:0 0 auto}
 .bar-flag.crit{color:var(--crit);background:var(--crit-wash);border:1px solid var(--crit-line)}
 .bar-flag.risk{color:var(--high);background:var(--high-wash);border:1px solid var(--high-line)}

@@ -82,13 +82,14 @@
 
     const c = d.by_criticality || {};
     const auth = d.by_auth_state || {};
-    // Servicios sin credencial = suma de by_exposure (honeypots ya excluidos aguas
-    // arriba). Fallback a los unauthenticated-* de by_auth_state, y al legacy "open"
-    // para stats.json viejos. El "open" solo ya no existe (paso 7 lo reemplazó).
+    // Accesible sin autenticación = data + control de by_exposure. NO se incluye
+    // info (unauthenticated-info es DIVULGACIÓN de información — SNMP público,
+    // listados de directorio —, no acceso a un servicio). Honeypots ya excluidos
+    // aguas arriba. Fallback a by_auth_state; el legacy "open" ya no existe (paso 7).
     const expo = d.by_exposure || {};
     const noCred = Object.keys(expo).length
-      ? Object.values(expo).reduce((a, b) => a + b, 0)
-      : ((auth["unauthenticated-info"] || 0) + (auth["unauthenticated-data"] || 0) + (auth["unauthenticated-control"] || 0)) || (auth.open || 0);
+      ? (expo["unauthenticated-data"] || 0) + (expo["unauthenticated-control"] || 0)
+      : ((auth["unauthenticated-data"] || 0) + (auth["unauthenticated-control"] || 0)) || (auth.open || 0);
     const targets = {
       crit: c.CRITICAL || 0, high: c.HIGH || 0, med: c.MEDIUM || 0, low: c.LOW || 0,
       hosts: d.total_devices || 0, open: noCred,
@@ -98,7 +99,7 @@
     targets.ips = d.ips_scanned || 2500000;
 
     $("#crit-foot-meta").textContent =
-      `2,5 M IP analizadas · ${fmt(d.total_devices || 0)} equipos vivos · ${fmt(noCred)} servicios sin credenciales`;
+      `2,5 M IP analizadas · ${fmt(d.total_devices || 0)} equipos vivos · ${fmt(noCred)} accesibles sin autenticación`;
 
     barChart("#device-bars", (d.by_device_type || []).slice(0, 8)
       .map((x) => ({ label: devLabel(x.key), value: x.count, flag: devFlag(x.key) })));
