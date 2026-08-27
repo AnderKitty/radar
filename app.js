@@ -82,16 +82,23 @@
 
     const c = d.by_criticality || {};
     const auth = d.by_auth_state || {};
+    // Servicios sin credencial = suma de by_exposure (honeypots ya excluidos aguas
+    // arriba). Fallback a los unauthenticated-* de by_auth_state, y al legacy "open"
+    // para stats.json viejos. El "open" solo ya no existe (paso 7 lo reemplazó).
+    const expo = d.by_exposure || {};
+    const noCred = Object.keys(expo).length
+      ? Object.values(expo).reduce((a, b) => a + b, 0)
+      : ((auth["unauthenticated-info"] || 0) + (auth["unauthenticated-data"] || 0) + (auth["unauthenticated-control"] || 0)) || (auth.open || 0);
     const targets = {
       crit: c.CRITICAL || 0, high: c.HIGH || 0, med: c.MEDIUM || 0, low: c.LOW || 0,
-      hosts: d.total_devices || 0, open: auth.open || 0,
-      alive: d.total_devices || 0, nocreds: auth.open || 0,
+      hosts: d.total_devices || 0, open: noCred,
+      alive: d.total_devices || 0, nocreds: noCred,
     };
     // IP barridas por ciclo: usa el campo si existe; si no, el tamaño real del barrido (~2,5 M)
     targets.ips = d.ips_scanned || 2500000;
 
     $("#crit-foot-meta").textContent =
-      `2,5 M IP analizadas · ${fmt(d.total_devices || 0)} equipos vivos · ${fmt(auth.open || 0)} servicios sin credenciales`;
+      `2,5 M IP analizadas · ${fmt(d.total_devices || 0)} equipos vivos · ${fmt(noCred)} servicios sin credenciales`;
 
     barChart("#device-bars", (d.by_device_type || []).slice(0, 8)
       .map((x) => ({ label: devLabel(x.key), value: x.count, flag: devFlag(x.key) })));
@@ -108,6 +115,7 @@
     persistentNote(d);
     ispRank(d.by_isp_detail || []);
     webExposCard(d.by_web_exposure || []);
+    exposCard(d.by_exposure_device || {});
     externalCard(d.external);
     startCounters(targets);
   }
@@ -148,7 +156,8 @@
     host.textContent = "";
     const rows = [
       { label: "Requiere credenciales", value: auth["auth-required"] || 0, color: "var(--ok)" },
-      { label: "Sin autenticación (open)", value: auth.open || 0, color: "var(--crit)" },
+      { label: "Web pública (normal)", value: auth["public-content"] || 0, color: "var(--ink-3)" },
+      { label: "Sin credencial confirmada", value: ((auth["unauthenticated-info"] || 0) + (auth["unauthenticated-data"] || 0) + (auth["unauthenticated-control"] || 0)) || (auth.open || 0), color: "var(--crit)" },
       { label: "Desconocido", value: auth.unknown || 0, color: "var(--ink-4)" },
     ];
     const max = Math.max(1, ...rows.map((r) => r.value));
@@ -265,6 +274,34 @@
     barChart("#webexp-bars", list.map((x) => ({
       label: WEBEXP_LABEL[x.key] || x.key, value: x.count, flag: { cls: "crit", txt: "sensible" },
     })));
+  }
+
+  /* ── Qué está expuesto sin credencial (by_exposure_device) ──────
+     Desglose por tipo de equipo del subconjunto grave (datos/control)
+     de la exposición sin autenticación. Conteos agregados, honeypots
+     excluidos aguas arriba. */
+  const EXPO_DEV_LABEL = {
+    ADMIN_PANEL: "Paneles de administración", CAMERA: "Cámaras", EXPOSED_CAMERA: "Cámaras",
+    EXPOSED_DATABASE: "Bases de datos", EXPOSED_SERVICE: "Servicios expuestos",
+    "ICS/SCADA": "Control industrial (PLC/SCADA)", IOT_DEVICE: "Dispositivos IoT",
+    REMOTE_ACCESS: "Accesos remotos", SERVER: "Servidores", WEB_SERVER: "Servidores web",
+    TRANSPORT_SYSTEM: "Sistemas de transporte",
+  };
+  function exposCard(obj) {
+    const card = $("#expo-card");
+    if (!card) return;
+    // Fusionar por etiqueta (ej. CAMERA + EXPOSED_CAMERA → "Cámaras").
+    const m = new Map();
+    for (const [k, v] of Object.entries(obj || {})) {
+      const label = EXPO_DEV_LABEL[k] || devLabel(k);
+      m.set(label, (m.get(label) || 0) + v);
+    }
+    const rows = [...m.entries()]
+      .map(([label, value]) => ({ label, value, flag: { cls: "crit", txt: "sin auth" } }))
+      .sort((a, b) => b.value - a.value).slice(0, 8);
+    if (!rows.length) return;
+    card.style.display = "block";
+    barChart("#expo-bars", rows);
   }
 
   /* ── Fuera de Uruguay ───────────────────────────────────────── */
