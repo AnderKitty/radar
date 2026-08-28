@@ -117,6 +117,7 @@
     ispRank(d.by_isp_detail || []);
     webExposCard(d.by_web_exposure || []);
     exposCard(d.by_exposure_device || {});
+    dbSplitNote(d);
     externalCard(d.external);
     startCounters(targets);
   }
@@ -303,6 +304,27 @@
     if (!rows.length) return;
     card.style.display = "block";
     barChart("#expo-bars", rows);
+  }
+
+  /* ── Bases de datos: puerto expuesto ≠ sin credencial (SPEC-2026-010) ──
+     Dos afirmaciones distintas: db_exposed = motor de base alcanzable en
+     internet (puerto abierto, confirmado o no por handshake); db_no_cred = el
+     subconjunto PROBADO accesible sin credencial (el propio motor respondió sin
+     autenticarse). Conteos agregados, honeypots excluidos aguas arriba. Degrada
+     elegante: si el stats.json aún no trae los campos, la tarjeta no aparece. */
+  function dbSplitNote(d) {
+    const el = $("#db-split-note");
+    const card = $("#db-split-card");
+    if (!el || !card) return;
+    const exposed = d.db_exposed || 0;
+    if (!exposed) return;
+    const noCred = d.db_no_cred || 0;
+    el.innerHTML =
+      `<strong>${fmt(exposed)}</strong> bases con el puerto expuesto a internet · de esas, ` +
+      `<strong>${fmt(noCred)}</strong> confirmadas <em>accesibles sin credencial</em>. ` +
+      `El resto tiene el motor confirmado pero la autenticación es desconocida o es ` +
+      `login-first (MySQL, PostgreSQL, SQL Server) — no afirmamos «sin contraseña».`;
+    card.style.display = "block";
   }
 
   /* ── Fuera de Uruguay ───────────────────────────────────────── */
