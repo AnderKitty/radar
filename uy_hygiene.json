@@ -1,19 +1,19 @@
 {
-  "generated": "2026-09-04T21:01:18Z",
+  "generated": "2026-09-05T21:01:54Z",
   "total_domains": 1935,
   "overall": {
     "total": 1935,
-    "with_spf": 1120,
-    "spf_enforced": 467,
-    "with_dmarc": 697,
+    "with_spf": 1122,
+    "spf_enforced": 468,
+    "with_dmarc": 696,
     "dmarc_enforced": 332
   },
   "by_bucket": {
     "com.uy": {
       "total": 791,
-      "with_spf": 400,
+      "with_spf": 401,
       "spf_enforced": 186,
-      "with_dmarc": 275,
+      "with_dmarc": 274,
       "dmarc_enforced": 146
     },
     "edu.uy": {
@@ -25,8 +25,8 @@
     },
     "gub.uy": {
       "total": 292,
-      "with_spf": 191,
-      "spf_enforced": 128,
+      "with_spf": 192,
+      "spf_enforced": 129,
       "with_dmarc": 150,
       "dmarc_enforced": 105
     },
