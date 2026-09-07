@@ -1,20 +1,27 @@
 {
-  "generated": "2026-09-06T21:02:07Z",
-  "total_domains": 1935,
+  "generated": "2026-09-07T20:59:26Z",
+  "total_domains": 3723,
   "overall": {
-    "total": 1935,
-    "with_spf": 1122,
-    "spf_enforced": 468,
-    "with_dmarc": 696,
-    "dmarc_enforced": 333
+    "total": 3723,
+    "with_spf": 2318,
+    "spf_enforced": 1007,
+    "with_dmarc": 1501,
+    "dmarc_enforced": 635
   },
   "by_bucket": {
     "com.uy": {
-      "total": 791,
-      "with_spf": 401,
-      "spf_enforced": 186,
-      "with_dmarc": 274,
-      "dmarc_enforced": 146
+      "total": 2576,
+      "with_spf": 1597,
+      "spf_enforced": 725,
+      "with_dmarc": 1077,
+      "dmarc_enforced": 447
+    },
+    "despino.uy": {
+      "total": 1,
+      "with_spf": 1,
+      "spf_enforced": 1,
+      "with_dmarc": 0,
+      "dmarc_enforced": 0
     },
     "edu.uy": {
       "total": 359,
@@ -24,11 +31,11 @@
       "dmarc_enforced": 42
     },
     "gub.uy": {
-      "total": 292,
-      "with_spf": 192,
-      "spf_enforced": 129,
-      "with_dmarc": 150,
-      "dmarc_enforced": 106
+      "total": 294,
+      "with_spf": 191,
+      "spf_enforced": 128,
+      "with_dmarc": 151,
+      "dmarc_enforced": 107
     },
     "mil.uy": {
       "total": 4,
@@ -41,7 +48,7 @@
       "total": 81,
       "with_spf": 53,
       "spf_enforced": 13,
-      "with_dmarc": 22,
+      "with_dmarc": 23,
       "dmarc_enforced": 6
     },
     "org.uy": {
