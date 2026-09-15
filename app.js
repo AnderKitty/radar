@@ -77,7 +77,7 @@
     .catch(() => document.body.classList.add("load-failed"));
 
   function render(d) {
-    $("#last-run").textContent = d.last_run || "~18:00 · America/Montevideo";
+    { const lr = $("#last-run"); if (lr) lr.textContent = d.last_run || "~18:00 · America/Montevideo"; }
     document.querySelectorAll(".updated").forEach((n) => (n.textContent = fmtDate(d.scan_date || d.updated)));
 
     const c = d.by_criticality || {};

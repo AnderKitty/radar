@@ -139,6 +139,15 @@ section + section{border-top:1px solid var(--line-soft)}
 }
 .stamp b{color:var(--ink);font-weight:700}
 .stamp .live{width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px rgba(99,179,237,.16);animation:pulseDot 2.4s infinite}
+/* estado "en pausa": puntito ámbar estático (no "en vivo") */
+.stamp.paused .live{background:var(--high);box-shadow:0 0 0 3px rgba(240,163,94,.16);animation:none}
+/* banner de aviso — barridos en pausa */
+.notice{background:var(--high-wash);border-bottom:1px solid var(--high-line)}
+.notice-in{display:flex;align-items:flex-start;gap:11px;max-width:1360px;margin:0 auto;padding:12px 40px}
+.notice-ic{color:var(--high-ink);font-size:15px;line-height:1.5;flex:none}
+.notice-tx{margin:0;color:var(--ink-2);font-size:13px;line-height:1.55}
+.notice-tx b{color:var(--ink);font-weight:700}
+@media(max-width:640px){.notice-in{padding:11px 20px;font-size:12.5px}}
 .hero h1{
   font-family:var(--f-display);font-weight:800;letter-spacing:-.025em;
   font-size:clamp(38px,5vw,54px);line-height:1.06;margin:22px auto 0;max-width:20ch;

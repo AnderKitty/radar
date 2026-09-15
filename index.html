@@ -51,10 +51,18 @@
     </div>
   </nav>
 
+  <!-- ══ AVISO: barridos en pausa ══ -->
+  <div class="notice" role="status">
+    <div class="notice-in">
+      <span class="notice-ic" aria-hidden="true">⏸</span>
+      <p class="notice-tx"><b>Barridos en pausa por tiempo indefinido.</b> Zarpa no está ejecutando nuevos escaneos. Los datos que ves corresponden al último barrido del <b>7 de septiembre de 2026</b> y se mantienen como referencia; el ciclo se reanudará cuando la infraestructura vuelva a estar disponible.</p>
+    </div>
+  </div>
+
   <!-- ══ HERO ══ -->
   <header class="hero" id="top">
     <div class="wrap hero-in">
-      <span class="stamp"><span class="live"></span> Último barrido: <b id="last-run">—</b> · ciclo diario</span>
+      <span class="stamp paused"><span class="live"></span> Barridos en pausa · datos al <b><span class="updated">—</span></b></span>
       <h1>Cuánto de Uruguay está <span class="accent">expuesto</span> en internet</h1>
       <p class="lede">Cámaras, routers, bases de datos y paneles de todo el país quedan accesibles desde internet, muchas veces sin que nadie lo note. Zarpa lo mide de forma <strong>pasiva</strong> —sin tocar ningún equipo— y publica solo <strong>estadísticas agregadas</strong>: nunca una IP ni datos de un equipo puntual.</p>
       <div class="hero-btns">
